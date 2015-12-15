@@ -19,7 +19,7 @@ function ResultsController($state, $http, NgMap, Search) {
   results.$state = $state;
 
 
-  /*Triggers SearchFactory method sets response to ... redirects to results 
+  /*Triggers SearchFactory method sets response to ... redirects to results
   @param {string} query [comma deliniated word string]*/
   results.getByTagOnly = function(query){
     console.log(query);
