@@ -95,6 +95,7 @@ function ProjectsController($log, $http, $timeout, $scope) {
                         state: {
                             opened: true
                         },
+                        orgId: project._id,
                         text: project.name
                     });
                 });
@@ -110,45 +111,62 @@ function ProjectsController($log, $http, $timeout, $scope) {
                         state: {
                             opened: true
                         },
+                        orgId: folder._id,
                         text: folder.name
                     });
 
                 });
-                vm.originalData = vm.treeData; 
+                vm.originalData = vm.treeData;
                 return console.log(vm.treeData);
-                
+
                 //folder.FolderId || folder.ProjectId || 
             }));
     };
 
     vm.addNewNode = function() {
-        vm.treeData.push({
+        console.log(vm.newNode);
+        var index = parseInt(vm.newNode.parent, 10) + 3;
+        var originalId = vm.originalData[index].orgId;
+        var node = {
             id: (newId++).toString(),
             parent: vm.newNode.parent,
+            orgId: originalId || null,
             text: vm.newNode.text
-        });
-    };
+        };
+        vm.treeData.push(node);
+        return $http.post('/api/folders', {
+                name: node.text,
+                info: 'this is a test',
+                active: 1,
+                FolderId: originalId || null
+            }).then(function(res) {
+        return console.log(res);
+      });
 
-    this.setNodeType = function() {
-        var item = _.findWhere(this.treeData, {
-            id: this.selectedNode
-        });
-        item.type = this.newType;
-        // toaster.pop('success', 'Node Type Changed', 'Changed the type of node ' + this.selectedNode);
-    };
+            // Folder.create()
+        
+};
 
-    this.readyCB = function() {
-        $timeout(function() {
-            vm.ignoreChanges = false;
-            // toaster.pop('success', 'JS Tree Ready', 'Js Tree issued the ready event')
-        });
-    };
+this.setNodeType = function() {
+    var item = _.findWhere(this.treeData, {
+        id: this.selectedNode
+    });
+    item.type = this.newType;
+    // toaster.pop('success', 'Node Type Changed', 'Changed the type of node ' + this.selectedNode);
+};
 
-    this.createCB = function(e, item) {
-        // $timeout(function() {toaster.pop('success', 'Node Added', 'Added new node with the text ' + item.node.text)});
-    };
+this.readyCB = function() {
+    $timeout(function() {
+        vm.ignoreChanges = false;
+        // toaster.pop('success', 'JS Tree Ready', 'Js Tree issued the ready event')
+    });
+};
 
-    this.applyModelChanges = function() {
-        return !vm.ignoreChanges;
-    };
+this.createCB = function(e, item) {
+    // $timeout(function() {toaster.pop('success', 'Node Added', 'Added new node with the text ' + item.node.text)});
+};
+
+this.applyModelChanges = function() {
+    return !vm.ignoreChanges;
+};
 };
