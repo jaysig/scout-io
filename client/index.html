@@ -45,6 +45,7 @@
   <link rel="stylesheet" href="components/comments/comments.css">
   <link rel="stylesheet" href="components/modal/photoDialog.css">
   <link rel="stylesheet" href="components/navbar/navbar.css">
+  <link rel="stylesheet" href="components/save-dialog/save-dialog.css">
   <!-- endinjector -->
   <!-- endbuild -->
 </head>
@@ -82,21 +83,15 @@
     <![endif]-->
     <!-- build:js({client,node_modules}) app/vendor.js -->
       <!-- bower:js -->
-      <script src="bower_components/jquery/dist/jquery.js"></script>
-      <script src="bower_components/angular/angular.js"></script>
       <script src="bower_components/angular-resource/angular-resource.js"></script>
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
       <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-socket-io/socket.js"></script>
-      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
-      <script src="bower_components/angular-animate/angular-animate.js"></script>
       <script src="bower_components/angular-aria/angular-aria.js"></script>
       <script src="bower_components/angular-material/angular-material.js"></script>
       <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
-      <script src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
-      <script src="bower_components/jstree/dist/jstree.js"></script>
       <script src="bower_components/ng-js-tree/dist/ngJsTree.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
@@ -114,6 +109,8 @@
       <script src="app/app.constant.js"></script>
       <script src="app/main/main.controller.js"></script>
       <script src="app/main/main.js"></script>
+      <script src="app/projects/dist/ngJsTree.js"></script>
+      <script src="app/projects/dist/ngJsTree.min.js"></script>
       <script src="app/projects/projects.controller.js"></script>
       <script src="app/projects/projects.js"></script>
       <script src="app/results/results.controller.js"></script>

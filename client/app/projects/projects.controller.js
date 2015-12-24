@@ -6,7 +6,7 @@ function ProjectsController($log, $http, $timeout, $scope) {
     var vm = this;
 
     var newId = 1;
-    var folderId = 1;
+    // var folderId = 1;
     vm.ignoreChanges = false;
     vm.newNode = {};
     vm.originalData = [{
@@ -42,6 +42,10 @@ function ProjectsController($log, $http, $timeout, $scope) {
     vm.treeData = [];
     angular.copy(vm.originalData, vm.treeData);
     vm.treeConfig = {
+        changed: function(e, data) {
+            console.log(data.changed.selected); // newly selected
+            console.log(data.changed.deselected); // newly deselected
+        },
         core: {
             multiple: false,
             animation: true,
@@ -51,21 +55,21 @@ function ProjectsController($log, $http, $timeout, $scope) {
             check_callback: true,
             worker: true
         },
-        types: {
-            default: {
-                icon: 'glyphicon glyphicon-flash'
-            },
-            star: {
-                icon: 'glyphicon glyphicon-cloud'
-            },
-            cloud: {
-                icon: 'glyphicon glyphicon-cloud'
-            }
-        },
         version: 1,
-        plugins: ['types', 'checkbox']
+        plugins: ['changed']
     };
-
+    // 'types', 'checkbox'
+    // types: {
+    //       default: {
+    //           icon: 'glyphicon glyphicon-flash'
+    //       },
+    //       star: {
+    //           icon: 'glyphicon glyphicon-cloud'
+    //       },
+    //       cloud: {
+    //           icon: 'glyphicon glyphicon-cloud'
+    //       }
+    //   },
 
     vm.reCreateTree = function() {
         vm.ignoreChanges = true;
@@ -123,6 +127,7 @@ function ProjectsController($log, $http, $timeout, $scope) {
             }));
     };
 
+    //Uses the ID assigned from SQL to ensure folders get added to the right folder
     vm.addNewNode = function() {
         console.log(vm.newNode);
         var index = parseInt(vm.newNode.parent, 10) + 3;
@@ -135,38 +140,38 @@ function ProjectsController($log, $http, $timeout, $scope) {
         };
         vm.treeData.push(node);
         return $http.post('/api/folders', {
-                name: node.text,
-                info: 'this is a test',
-                active: 1,
-                FolderId: originalId || null
-            }).then(function(res) {
-        return console.log(res);
-      });
+            name: node.text,
+            info: 'this is a test',
+            active: 1,
+            FolderId: originalId || null
+        }).then(function(res) {
+            return console.log(res);
+        });
 
-            // Folder.create()
-        
-};
+        // Folder.create()
 
-this.setNodeType = function() {
-    var item = _.findWhere(this.treeData, {
-        id: this.selectedNode
-    });
-    item.type = this.newType;
-    // toaster.pop('success', 'Node Type Changed', 'Changed the type of node ' + this.selectedNode);
-};
+    };
 
-this.readyCB = function() {
-    $timeout(function() {
-        vm.ignoreChanges = false;
-        // toaster.pop('success', 'JS Tree Ready', 'Js Tree issued the ready event')
-    });
-};
+    this.setNodeType = function() {
+        var item = _.findWhere(this.treeData, {
+            id: this.selectedNode
+        });
+        item.type = this.newType;
+        // toaster.pop('success', 'Node Type Changed', 'Changed the type of node ' + this.selectedNode);
+    };
 
-this.createCB = function(e, item) {
-    // $timeout(function() {toaster.pop('success', 'Node Added', 'Added new node with the text ' + item.node.text)});
-};
+    this.readyCB = function() {
+        $timeout(function() {
+            vm.ignoreChanges = false;
+            // toaster.pop('success', 'JS Tree Ready', 'Js Tree issued the ready event')
+        });
+    };
 
-this.applyModelChanges = function() {
-    return !vm.ignoreChanges;
-};
+    this.createCB = function(e, item) {
+        // $timeout(function() {toaster.pop('success', 'Node Added', 'Added new node with the text ' + item.node.text)});
+    };
+
+    this.applyModelChanges = function() {
+        return !vm.ignoreChanges;
+    };
 };

@@ -1,45 +1,37 @@
-<md-toolbar layout="row" layout-align="space-between center" id="toolbar">   <!--style="color:#EEEFB9;"-->
+<md-toolbar layout="row" layout-align="space-between center" id="toolbar">
+    <!--style="color:#EEEFB9;"-->
     <!--The left side-->
-  <i class="fa fa-camera-retro fa-2x fa-border"></i>
-  <h2 class="md-toolbar-tools">
+    <i class="fa fa-camera-retro fa-2x fa-border"></i>
+    <h2 class="md-toolbar-tools">
     <a href="/" class="navbar-brand">Scout.IO</a>
   </h2>
-
-  <!--The right side-->
-  <span flex></span>
-
-  <!-- <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active" ui-sref="signup">Sign up</md-button>
+    <!--The right side-->
+    <span flex></span>
+    <!-- <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active" ui-sref="signup">Sign up</md-button>
   <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active" ui-sref="login">Login</md-button> -->
-
-  <a class="loginContainer" aria-label="Login" ng-hide="nav.isLoggedIn()" ui-sref-active="active" login>
+    <a class="loginContainer" aria-label="Login" ng-hide="nav.isLoggedIn()" ui-sref-active="active" login>
     </a>
-
-  <span ng-show="nav.isLoggedIn()" class="navbar-text">Hello! {{ nav.getCurrentUser().name }}</span>
-
-  <md-button class="md-icon-button" aria-label="Search" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="results">
-    <i class="fa fa-search fa-2x"></i>
-    <md-tooltip md-direction="bottom">Search</md-tooltip>
-  </md-button>
-
-  <md-button class="md-icon-button" aria-label="Projects" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="projects">
-    <i class="fa fa-archive fa-2x"></i>
-    <md-tooltip md-direction="bottom">My Projects</md-tooltip>
-  </md-button>
-
-  <md-button class="md-icon-button" aria-label="Administration" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="administration">
-    <i class="fa fa-cog fa-2x"></i>
-    <md-tooltip md-direction="bottom">Project Administration</md-tooltip>
-  </md-button>
-
-  <md-button class="md-icon-button" aria-label="Profile" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="settings">
-    <md-tooltip md-direction="bottom">My Settings</md-tooltip>
-    <i class="fa fa-user fa-2x"></i>
-  </md-button>
-
-  <md-button class="md-icon-button" aria-label="Signout" ng-show="nav.isLoggedIn()" ui-sref="logout">
-    <i class="fa fa-sign-out fa-2x"></i>
-    <md-tooltip md-direction="bottom">Logout</md-tooltip>
-  </md-button>
-
-
+    <span ng-show="nav.isLoggedIn()" class="navbar-text">Hello! {{ nav.getCurrentUser().name }}</span>
+    <div hide show-md flex>
+        <md-button class="md-icon-button" aria-label="Search" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="results">
+            <i class="fa fa-search fa-2x"></i>
+            <md-tooltip md-direction="bottom">Search</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Projects" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="projects">
+            <i class="fa fa-archive fa-2x"></i>
+            <md-tooltip md-direction="bottom">My Projects</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Administration" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="administration">
+            <i class="fa fa-cog fa-2x"></i>
+            <md-tooltip md-direction="bottom">Project Administration</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Profile" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="settings">
+            <md-tooltip md-direction="bottom">My Settings</md-tooltip>
+            <i class="fa fa-user fa-2x"></i>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Signout" ng-show="nav.isLoggedIn()" ui-sref="logout">
+            <i class="fa fa-sign-out fa-2x"></i>
+            <md-tooltip md-direction="bottom">Logout</md-tooltip>
+        </md-button>
+    </div>
 </md-toolbar>
