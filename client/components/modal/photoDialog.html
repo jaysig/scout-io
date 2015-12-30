@@ -15,7 +15,7 @@
         <img src={{dialog.photo.url_m}} width>
         <p id="date-taken">Date Taken: {{dialog.photo.datetaken}}</p>
 
-        <div flex="80" ng-if="Auth.isLoggedIn()">
+        <div flex="80" ng-if="dialog.isLoggedIn">
           <save></save>
         </div>
       </div>

@@ -11,6 +11,8 @@ angular.module('ScoutIOApp')
       $scope.distance = '';
       $scope.duration = '';
 
+      $scope.isLoggedIn = Auth.isLoggedIn();
+
       if ($scope.photo.height_m > $scope.photo.width_m) {
         $scope.photoDialogFlexWidth = "60";
       }
@@ -87,7 +89,8 @@ angular.module('ScoutIOApp')
           photo: $scope.photo,
           photoDialogFlexWidth: $scope.photoDialogFlexWidth,
           placeChanged: $scope.placeChanged,
-          mapStyle: $scope.mapStyle
+          mapStyle: $scope.mapStyle,
+          isLoggedIn:  $scope.isLoggedIn
         },
         controller: DialogController,
         controllerAs: 'dialog',
@@ -99,6 +102,9 @@ angular.module('ScoutIOApp')
     };
 
     function DialogController($scope, $mdDialog, NgMap, Auth) {
+
+      //$mdDialog.isLoggedIn = Auth.isLoggedIn();
+
       $scope.hide = function () {
         $mdDialog.hide();
       };
