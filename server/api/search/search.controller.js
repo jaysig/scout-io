@@ -40,10 +40,9 @@ function handleEntityNotFound(res) {
   };
 }
 
-
 exports.tags = function(req, res) {
   console.log("in the tags func");
- 
+
   var input = encodeURIComponent(req.params.query).replace(/'/g, "%27").replace(/%20/g, "+");
   var query = flickrURL + "&tags=" + input + "&tag_mode=all" + flickrEnd;
   console.log(query);
@@ -56,7 +55,7 @@ exports.tags = function(req, res) {
 // do some sequelize stuff here to check whether any returned photos already saved by user in the db
 //get all user links by checking links_table by user_id return an array of photo_ids
 //compare each Flickr photo against this array (by id)
-// if there is a match add property to the Flickr photo isSaved = true; 
+// if there is a match add property to the Flickr photo isSaved = true;
 // when this photo is diplayed in results it will have a star and if it is clicked on it will get comments
     res.send(data);
   });
@@ -66,7 +65,7 @@ exports.tags = function(req, res) {
 exports.byID = function(req, res) {
   console.log('in the id func', req.params);
 
-  var query = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + flickrAPIKey + "&photo_id=" + req.params.photoid + "&format=json&nojsoncallback=1"; 
+  var query = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=" + flickrAPIKey + "&photo_id=" + req.params.photoid + "&format=json&nojsoncallback=1";
 
   request(query, function (err, response, data) {
     if (err) {
@@ -87,7 +86,7 @@ exports.byID = function(req, res) {
  if (obj.placeName){
    query+= "&lat=" + obj.lat + "&lon=" + obj.lon + "&radius=" + obj.radius + "&radius_units=mi";
   }
- 
+
   request(query, function (err, response, data) {
     if (err) {
       console.log(err);
@@ -103,15 +102,18 @@ exports.searchCriteria = function (req, res) {
   var obj = req.body;
 
   var query = flickrURL;
-  //check for submitted keywords if they exist uri encode them 
+  //check for submitted keywords if they exist uri encode them
   if (obj.keywords){
+    if (obj.tag === "any keywords") {
+      obj.keywords = obj.keywords.replace(/\s+/g, ',');
+    }
     var tags = encodeURIComponent(obj.keywords).replace(/'/g, "%27").replace(/%20/g, "+");
     query += "&tags=" + tags;
   }
   //check for any or all tags
   if (obj.tag === "all keywords"){
     query += "&tag_mode=all";
-  } 
+  }
   if (obj.tag === "any keywords"){
     query += "tag_mode=any";
   }
@@ -151,7 +153,7 @@ exports.searchCriteria = function (req, res) {
   }
 
   query+= flickrEnd;
-  
+
   var options = {
     url: query
   };
@@ -167,7 +169,7 @@ exports.searchCriteria = function (req, res) {
     // do some sequelize stuff here to check whether any returned photos already saved by user in the db
     //get all user links by checking links_table by user_id return an array of photo_ids
     //compare each Flickr photo against this array (by id)
-    // if there is a match add property to the Flickr photo isSaved = true; 
+    // if there is a match add property to the Flickr photo isSaved = true;
     // when this photo is diplayed in results it will have a star and if it is clicked on it will get comments
     res.send(data);
   });

@@ -2,10 +2,30 @@
                 IMAGES
 =========================================*/
 
-#img2 {
+#img4 {
   background-image: url("/../assets/nevada-min.jpeg");
   width:auto;
   height:705px;
+}
+
+#img0 {
+  background-image: url("/../assets/fallforest.jpeg");
+  width:auto;
+}
+
+#img1 {
+  background-image: url("/../assets/camera-keys.jpg");
+  width:auto;
+}
+
+#img2 {
+  background-image: url("/../assets/lake.jpeg");
+  width:auto;
+}
+
+#img3 {
+  background-image: url("/../assets/organized2.jpeg");
+  width:auto;
 }
 
 .imgContainer {
@@ -189,17 +209,17 @@ md-card.splash-card {
                	Dialog 1
 =========================================*/
 .dialogdemoBasicUsage #popupContainer {
-  position: relative; 
+  position: relative;
 }
 
 .dialogdemoBasicUsage .footer {
   width: 100%;
   text-align: center;
-  margin-left: 20px; 
+  margin-left: 20px;
 }
 
 .dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
   font-size: 0.8em;
-  margin-top: 50px; 
+  margin-top: 50px;
 }
 
