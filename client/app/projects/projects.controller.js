@@ -2,9 +2,8 @@ angular.module('ScoutIOApp')
     .controller('ProjectsController', ProjectsController);
 
 
-function ProjectsController($log, $http, $timeout, $scope, Folder) {
+function ProjectsController($log, $http, $timeout, $scope, Project) {
     var vm = this;
-    console.log($scope.treeInstance);
     var newId = 1;
     vm.ignoreChanges = false;
     vm.newNode = {};
@@ -46,70 +45,98 @@ function ProjectsController($log, $http, $timeout, $scope, Folder) {
     };
 
     vm.getProjects = function() {
-        //Pull the data from the server
-        //Loop over it
-        //Display the folders
-        $http.get('/api/projects/').then(function(response) {
-                //comes back as an array of object
-                //need to use append project's name as an object's text key
-                return response.data.forEach(project => {
+        //Get the Users Projects
+        Project.getUserProjects()
+            .then(function(response) {
+                console.log(response);
+                var projects = response;
+                //Add the projects to the Tree Data
+                _.each(projects, function(project) {
                     vm.treeData.push({
                         id: (newId++).toString(),
                         parent: '#',
                         state: {
                             opened: true
                         },
+                        type: 'project',
                         orgId: project._id,
                         text: project.name
                     });
+                    //Get the projects subfolders 
+                    Project.getProjectFolders(project)
+                        .then(function(response) {
+                            console.log(response, ' response b');
+                            var folders = response;
+                            _.each(folders, function(folder) {
+                                var parent;
+                                //Ensures folders are connected correctly
+                                _.each(vm.treeData, function(item) {
+                                    if (item.orgId === folder.FolderId || item.orgId === folder.ProjectId) {
+                                        parent = parseInt(item.id, 10);
+                                    }
+                                });
+                                vm.treeData.push({
+                                    id: (newId++).toString(),
+                                    parent: parent,
+                                    state: {
+                                        opened: true
+                                    },
+                                    type: 'folder',
+                                    projectId: folder.ProjectId,
+                                    orgId: folder._id,
+                                    text: folder.name
+                                });
+                                console.log(vm.treeData);
+                            });
+                        });
                 });
-            })
-            .then($http.get('/api/folders/').then(function(response) {
-                //Pull the folders and assign them based on Parent
-                response.data.forEach(folder => {
-                    console.log(folder, 'folder name');
-                    vm.treeData.push({
-                        id: (newId++).toString(),
-                        parent: folder.FolderId || folder.ProjectId || '#',
-                        state: {
-                            opened: true
-                        },
-                        orgId: folder._id,
-                        text: folder.name
-                    });
-                });
-                return console.log(vm.treeData);
-            }));
+            });
     };
 
     //Uses the ID assigned from SQL to ensure folders get added to the right folder
     vm.addNewNode = function() {
         console.log(vm.newNode);
-        var index = parseInt(vm.newNode.parent, 10);
-        var originalId = vm.originalData[index].orgId;
-        var node = {
-            id: (newId++).toString(),
-            parent: vm.newNode.parent,
-            orgId: originalId || null,
-            text: vm.newNode.text
-        };
-        vm.treeData.push(node);
-        return $http.post('/api/folders', {
-            name: node.text,
-            info: 'this is a test',
-            active: 1,
-            FolderId: originalId || null
-        }).then(function(res) {
-            return console.log(res);
+        console.log(vm.newNode.text);
+        var folder, project,idA=59;
+        _.each(vm.treeData, function(item) {
+            if (item.id === vm.newNode.text) {
+                if (item.type === project) {
+                    project = parseInt(item.orgId, 10);
+                    return;
+                } else {
+                    project = item.projectId;
+                    folder = parseInt(item.orgId, 10);
+                    return;
+                }
+            }
         });
+            $http.post('/api/folders', {
+                name: vm.newNode.text,
+                info: 'this is a test',
+                active: 1,
+            }).then(function(res) {
+                idA = res.data._id;
+                console.log(idA,'idA');
+                var node = {
+                    id: (newId++).toString(),
+                    parent: vm.newNode.parent,
+                    orgId: res.data._id,
+                    text: vm.newNode.text
+                };
+                vm.treeData.push(node);
+                return $http.put('/api/folders/'+idA, {
+                FolderId: folder,
+                ProjectId: project,
+            });
+            });
     };
 
-    vm.getPhotos = function(folder){
-         $http.get('/api/links/').then(function(response) {
-                //comes back as an array of object
-                //need to use append project's name as an object's text key
-                return response.data.forEach(link => {
-                    if(link.FolderId === folder)
+    vm.getPhotos = function(folder) {
+        $http.get('/api/links/').then(function(response) {
+            //comes back as an array of object
+            //need to use append project's name as an object's text key
+            return response.data.forEach(link => {
+                if (link.FolderId === folder)
                     vm.photos.push({
                         id: (newId++).toString(),
                         parent: '#',
@@ -119,8 +146,8 @@ function ProjectsController($log, $http, $timeout, $scope, Folder) {
                         orgId: link._id,
                         text: link.name
                     });
-                });
             });
+        });
     };
     this.readyCB = function() {
         $timeout(function() {
@@ -133,8 +160,8 @@ function ProjectsController($log, $http, $timeout, $scope, Folder) {
         // $timeout(function() {toaster.pop('success', 'Node Added', 'Added new node with the text ' + item.node.text)});
     };
     //JS Tree Click Handler 
-    vm.selectCB = function(e,item){
-        console.log(item.node.original.originalId);
+    vm.selectCB = function(e, item) {
+        console.log(item.node.original);
     };
 
     this.applyModelChanges = function() {
