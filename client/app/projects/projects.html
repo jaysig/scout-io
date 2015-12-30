@@ -19,8 +19,6 @@
                     </md-input-container>
                 </div>
             </div>
-            <!-- DATE RANGE to search for season-->
-            <div id="container"></div>
         </div>
         <!-- RESULTS -->
         <!-- RENDERS PHOTOS FROM MAIN PAGE SEARCH -->
@@ -30,18 +28,14 @@
         <img src={{photo['url_s']}} ng-click="showDialog($event, photo)">
       </div>
     </div> -->
-        <!--   <div js-tree="treeConfig" ng-model="projects.projects" tree="projectTree"></div> -->
         <br/>
-        <div class="modal-footer">
-            <md-button ng-click="projects.getProjects()" type="submit" class="md-primary md-raised login-background">Get Projects</md-button>
-        </div>
         <br/>
         <div layout="row">
             <div>
                 <div class="panel panel-default">
                     <div class="panel-heading"><i class="glyphicon glyphicon-tree-conifer"></i> My Projects</div>
                     <div class="panel-body">
-                        <div js-tree="projects.treeConfig" should-apply="projects.applyModelChanges()" ng-model="projects.treeData" tree="projects.treeInstance" tree-events="ready:projects.readyCB;create_node:projects.createCB"></div>
+                        <div id='tree' js-tree="projects.treeConfig" should-apply="projects.applyModelChanges()" ng-model="projects.treeData" tree="treeInstance" tree-events="ready:projects.readyCB;create_node:projects.createCB;select_node:projects.selectCB" ng-init="projects.getProjects()"></div>
                     </div>
                 </div>
             </div>
@@ -53,6 +47,7 @@
                 <div class="panel-heading">
                     <i class="glyphicon glyphicon-plus"></i> Add Node</div>
                 <div class="panel-body">
+                    <!-- Create New Nodes -->
                     <form class="form-horizontal" novalidate name="newNodeForm" role="form">
                         <div class="form-group">
                             <label for="addNode" flex=33 class="control-label">Node Text:</label>
@@ -71,87 +66,24 @@
                         <div class="column">
                             <div flex=33>
                                 <div class="pull-right">
-                                    <button type="button" ng-disabled="newNodeForm.$invalid" ng-click="projects.addNewNode()" class="btn btn-success">Add Node</button>
+                                    <md-button type="button" ng-disabled="newNodeForm.$invalid" ng-click="projects.addNewNode()" >Add Node</md-button>
+                                    <!-- class="btn btn-success" -->
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-       <!--      <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="glyphicon glyphicon-edit"></i> Change Node Type</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" novalidate name="nodeTypeForm" role="form">
-                        <div class="form-group">
-                            <label for="nodeParent" flex=33 class="control-label">Node:</label>
-                            <div flex=33 ng-class="{ 'has-error' : nodeTypeForm.node.$invalid}">
-                                <select class="form-control" id="node" name="node" ng-model="projects.selectedNode" required>
-                                    <option ng-repeat="node in projects.treeData" value="{{node.id}}">{{node.text}}[{{node.id}}]</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="nodeParent" flex=33 class=" control-label">Type:</label>
-                            <div flex=33 ng-class="{ 'has-error' : nodeTypeForm.newType.$invalid}">
-                                <select class="form-control" id="newType" name="newType" ng-model="projects.newType" required>
-                                    <option value="default">Default</option>
-                                    <option value="star">Star</option>
-                                    <option value="cloud">Cloud</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div flex=33>
-                                <div class="pull-right">
-                                    <button type="button" ng-disabled="nodeTypeForm.$invalid" ng-click="projects.setNodeType()" class="btn btn-success">Set Type</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div> -->
         </div>
+    </md-sidenav>
+   <!--  <div id="photos" layout="row" layout-align="center" ng-controller="PhotoDialogCtrl" ng-cloak>
+        <div class="thumbnail" ng-repeat="photo in $root.photos" photo="photo" flex>
+            <md-card id=photo-card-{{photo.id}} class="results-photo" ng-click="showDialog($event, photo)" ng-mouseenter="results.onMouseEnter($event, photo)" ng-mouseleave="results.onMouseLeave($event, photo)" flex>
+                <p class="thumbnail-description">{{photo.title}}</p>
+                <img src={{photo.url_s}}>
+            </md-card>
+        </div>
+    </div> -->
 </div>
-</md-sidenav>
-<!-- <md-content flex id="map">
-    <ng-map
-      style="display:block;height:calc(100vh - 64px)"
-      styles="{{results.mapStyle}}"
-      scrollwheel="true"
-      zoom-to-include-markers="true"
-      center="current-location"
-      geo-fallback-center="37.09024, -95.71289100000001">
-    </ng-map>
 
-  </md-content> -->
-</div>
-<script>
-//Pull the data from the server
-//Loop over it
-//Display 
-'use strict';
-$(function() {
-    $('#container').jstree({
-        'core': {
-            'data': [{
-                "text": "Root node",
-                "children": [{
-                    "text": "Child node 1",
-                    "icon": "glyphicon glyphicon-flash"
-                }, {
-                    "text": "Child node 2",
-                    "icon": "glyphicon glyphicon-flash"
-                }]
-            }, {
-                "text": "Root node 2",
-                "children": [{
-                    "text": "Child node 1"
-                }, {
-                    "text": "Child node 2"
-                }]
-            }]
-        }
-    });
-});
-</script>
+

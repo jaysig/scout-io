@@ -1,22 +1,26 @@
+<md-card id="save-card">
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">Save This Image</span>
+    </md-card-title-text>
+  </md-card-title>
 
-   <form name='saveForm' ng-submit="saveLink(dialog.photo, save)" ng-cloak>
-     <div layout="column" layout-align="center center">
-       <md-select placeholder="Save to folder" ng-model="save.folder" md-on-open="getFolders()">
-         <md-option ng-value="folder" ng-repeat="folder in folders">{{folder.name}}</md-option>
-       </md-select>
+  <form name='saveForm' id="saveForm" ng-cloak>
+    <md-select placeholder="Save to folder"
+               ng-model="save.folderId"
+               ng-change="folderChanged()">
+      <md-option ng-value="f._id"
+                 ng-repeat="f in folders">{{f.name}}</md-option>
+    </md-select>
 
-       <md-input-container class="md-block">
-         <label>Add Comments</label>
-         <input type="textarea" ng-model="save.comment.text">
-       </md-input-container>
+    <md-input-container class="md-block">
+      <label>Add Comments</label>
+      <textarea ng-model="save.comment" columns="1" rows="3"></textarea>
+    </md-input-container>
 
-     <p class="md-caption">You are saving this photo to : {{save.folder ? save.folder.name : 'No place yet!' }}</p>
-     </div>
-   </form>
-
-     <md-button id="save-btn" class="md-primary md-raised" ng-click="saveLink(dialog.photo)">
-         Save
-     </md-button>
-     <br>
-     <p>Go To <a ng-href='/projects'>Projects</a> to Create a New Folder</p>
- 
+      <span ng-if="saved" id="saved-message">Photo Saved</span>
+      <md-button id="save-btn" class="md-primary md-raised" ng-click="saveLink(dialog.photo)">
+        Save
+      </md-button>
+  </form>
+</md-card>

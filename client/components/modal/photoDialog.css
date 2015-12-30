@@ -7,14 +7,14 @@
   font-size: 28px;
 }
 
-#comments-container {
-  width: 400px;
-  height: 100px;
-  margin-bottom: 10px;
-}
+/*#comments-container {*/
+  /*width: 400px;*/
+  /*height: 100px;*/
+  /*margin-bottom: 10px;*/
+/*}*/
 
 #date-taken {
-  margin-left: 25px;
+  margin: 0 0 15px 15px
 }
 
 #photo-dialog-places-textbox::-webkit-input-placeholder { color:transparent; }

@@ -83,38 +83,38 @@ exports.show = function(req, res) {
 
 // Creates a new Link in the DB
 exports.create = function(req, res) {
-  var newLink; 
+  var newLink;
+
   Link.create({
     name: req.body.name,
     url: req.body.url,
     apiID: Number(req.body.apiID),
     apiName: req.body.apiName,
-    active: 1,
+    active: 1
   })
     .then(function(link){
       newLink = link;
-      link.setUser(req.user);    
+      link.setUser(req.user);
+
       Folder.find({
         where: {
-          _id: req.body.folder._id
+          _id: req.body.folderId
         }
       })
       .then(function(folder){
-        newLink.setFolder(folder)        
+        newLink.setFolder(folder)
       })
     })
-    .then(function(link){
-      newLink = link;
-      if (req.body.comment !== null){
+    .then(function(){
+      if (req.body.comment){
         Comment.create({
-          text: req.body.comment.text
+          text: req.body.comment
         })
         .then(function(comment){
-          comment.setUser(req.user);
-          // this sets the users but not working for the link
           comment.setLink(newLink);
+          comment.setUser(req.user);
         })
-      };
+      }
     })
     .then(function(link){
       res.status(200).json(link);

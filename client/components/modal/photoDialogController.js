@@ -1,5 +1,5 @@
 angular.module('ScoutIOApp')
-  .controller('PhotoDialogCtrl', ['$mdDialog', '$scope', '$rootScope', '$state', 'NgMap', function ($mdDialog, $rootScope, $scope, $state, NgMap) {
+  .controller('PhotoDialogCtrl', ['$mdDialog', '$scope', '$rootScope', '$state', 'NgMap', 'Auth', function ($mdDialog, $rootScope, $scope, $state, NgMap, Auth) {
     $scope.showDialog = function (e, photo) {
       $scope.photo = photo;
       $scope.mapStyle = [{"featureType":"landscape","stylers":[{"hue":"#FFBB00"},{"saturation":43.400000000000006},{"lightness":37.599999999999994},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#FFC200"},{"saturation":-61.8},{"lightness":45.599999999999994},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":51.19999999999999},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":52},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#0078FF"},{"saturation":-13.200000000000003},{"lightness":2.4000000000000057},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#00FF6A"},{"saturation":-1.0989010989011234},{"lightness":11.200000000000017},{"gamma":1}]}];
@@ -17,13 +17,12 @@ angular.module('ScoutIOApp')
 
       var displayPath = function () {
         NgMap.getMap({id: 'photomap'}).then(function (map) {
-          //console.log(map.directionsRenderers[0].directions.routes[0].overview_path);
           var elevator = new google.maps.ElevationService;
 
           var route = map.directionsRenderers[0].directions.routes[0].legs[0];
           $scope.distance = route.distance.text;
           $scope.duration = route.duration.text;
-          //var path = map.directionsRenderers[0].directions.overview_path; //too many points for the width of the chart
+
           var path = [];
 
           for (var i = 0; i < route.steps.length; i++) {
@@ -49,8 +48,6 @@ angular.module('ScoutIOApp')
         }
 
         chart.draw(data, {
-          //height: 100,
-          //width:  450,
           legend: 'none',
           titleY: 'Elevation (m)'
         });
@@ -101,13 +98,11 @@ angular.module('ScoutIOApp')
       });
     };
 
-
-
-    function DialogController($scope, $rootScope, $mdDialog, NgMap) {
+    function DialogController($scope, $mdDialog, NgMap, Auth) {
       $scope.hide = function () {
         $mdDialog.hide();
       };
-        
+
       $scope.cancel = function () {
         $mdDialog.cancel();
       };

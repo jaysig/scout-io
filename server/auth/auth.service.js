@@ -34,7 +34,6 @@ function isAuthenticated() {
         .then(function(user) {
           if (!user) {
             return res.status(401).end();
-            // res.redirect('/').end();
           }
           req.user = user;
           next();

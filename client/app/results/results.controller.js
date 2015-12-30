@@ -3,9 +3,6 @@ angular.module('ScoutIOApp')
 
 function ResultsController($state, $http, NgMap, Search, $rootScope) {
   var results = this;
-  var bounds;
-
-  results.place;
 
   results.search = {
     placeName: '',
@@ -28,19 +25,18 @@ function ResultsController($state, $http, NgMap, Search, $rootScope) {
   results.$state = $state;
   $rootScope.photos = [];
 
-  results.query = '';
-
-
+  results.search.keywords = Search.getLastQuery();
+  results.place = null;
   results.currentDate = new Date();
   results.maxDate = new Date(
     results.currentDate.getFullYear(),
     results.currentDate.getMonth(),
-    results.currentDate.getDate());  //can't we just use 'new Date();' for this?
+    results.currentDate.getDate());
   results.minDate = results.search.startDate;
 
   results.getByTagOnly = function (query) {
     results.$state.go('results');
-  
+
     Search.getByTagOnly(query)
       .then(function (response) {
         if (response.data.photos) {
@@ -49,7 +45,6 @@ function ResultsController($state, $http, NgMap, Search, $rootScope) {
           $rootScope.photos = [];
         }
 
-        results.query = Search.getLastQuery();
         setMarkers();
       })
   };
@@ -76,8 +71,6 @@ function ResultsController($state, $http, NgMap, Search, $rootScope) {
           $rootScope.photos = [];
         }
 
-        results.query = Search.getLastQuery();
-
         setMarkers();
       })
   };
@@ -93,7 +86,7 @@ function ResultsController($state, $http, NgMap, Search, $rootScope) {
       }
 
       results.map.markers = [];
-      bounds = new google.maps.LatLngBounds();
+      var bounds = new google.maps.LatLngBounds();
 
       for (var i = 0; i < $rootScope.photos.length; i++) {
         var myLatlng = new google.maps.LatLng($rootScope.photos[i].latitude, $rootScope.photos[i].longitude);
@@ -111,10 +104,52 @@ function ResultsController($state, $http, NgMap, Search, $rootScope) {
         }
       }
 
-      results.map.setCenter(bounds.getCenter());
       results.map.fitBounds(bounds);
+
+      $( "#centerMarkerDiv" ).remove();
+      var centerControlDiv = document.createElement('div');
+      centerControlDiv.id = "centerMarkerDiv";
+      var centerControl = new CenterControl(centerControlDiv, results.map, bounds);
+
+      centerControlDiv.index = 1;
+      results.map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
     });
   };
+
+  function CenterControl(controlDiv, map, bounds) {
+    // Set CSS for the control border.
+    var controlUI = document.createElement('div');
+
+    controlUI.style.backgroundColor = '#fff';
+    controlUI.style.border = '2px solid #fff';
+    controlUI.style.borderRadius = '3px';
+    controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+    controlUI.style.cursor = 'pointer';
+    controlUI.style.marginBottom = '22px';
+    controlUI.style.marginTop = '8px';
+    controlUI.style.textAlign = 'center';
+    controlUI.title = 'Click to recenter the map';
+
+    controlDiv.appendChild(controlUI);
+
+    // Set CSS for the control interior.
+    var controlText = document.createElement('div');
+
+    controlText.style.color = 'rgb(25,25,25)';
+    controlText.style.fontSize = '16px';
+    controlText.style.lineHeight = '28px';
+    controlText.style.paddingLeft = '15px';
+    controlText.style.paddingRight = '15px';
+    controlText.innerHTML = 'Show All Markers';
+
+    controlUI.appendChild(controlText);
+
+    // Setup the click event listeners: simply set the map to Chicago.
+    controlUI.addEventListener('click', function() {
+      map.fitBounds(bounds);
+    });
+  }
+
 
   results.onMouseEnter = function (e, img) {
     $(".results-photo").removeClass("hovered");
@@ -145,18 +180,27 @@ function ResultsController($state, $http, NgMap, Search, $rootScope) {
   };
 
   results.toggleBounce = function (marker) {
-    if (results.map.getZoom() < 10) {
-      results.map.setZoom(10);
-    }
-    results.map.panTo(marker.getPosition());
-    marker.setAnimation(google.maps.Animation.BOUNCE);
+    NgMap.getMap({id: 'resultsmap'}).then(function (map) {
+      results.map = map;
 
-    setTimeout(function () {
-      marker.setAnimation(null);
-    }, 2100);
+      results.map.panTo(marker.getPosition());
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+
+
+      if (results.map.getZoom() < 10) {
+        results.map.setZoom(10);
+      }
+      setTimeout(function () {
+        marker.setAnimation(null);
+      }, 2100);
+    });
   };
 
   results.placeChanged = function () {
+    results.place = this.getPlace();
+  };
+
+  results.showAllMarkers = function () {
     results.place = this.getPlace();
   };
 

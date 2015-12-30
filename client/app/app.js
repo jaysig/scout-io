@@ -12,12 +12,10 @@ angular.module('ScoutIOApp', [
   'ui.router',
   'validation.match',
   'ngMaterial',
+  'ngMessages',
   'ngMap',
   'ngMdIcons',
   'ngJsTree'
-  // 'ngAnimate',
-  // 'ngFx'
-  // 'SearchFactory'
 ])
   .config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')

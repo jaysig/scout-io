@@ -6,11 +6,11 @@
 
     <div class="search-components">
       <md-card>
- 
+
         <form ng-cloak ng-submit="results.advancedSearch(results.search)">
           <md-input-container md-no-float class="md-block md-accent">
             <label>Keywords</label>
-            <input ng-model="results.search.keywords" autocomplete="off" placeholder="{{ results.query }}"/>
+            <input ng-model="results.search.keywords" autocomplete="off" ng-init="results.search.keywords"/>
           </md-input-container>
 
           <!-- ADVANCED SEARCH -->

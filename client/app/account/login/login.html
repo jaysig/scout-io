@@ -1,64 +1,52 @@
 <div layout="column" ng-cloak class="md-inline-form">
-    <!-- <md-content layout-gt-sm="row" layout-padding> -->
-        <!-- <md-button ng-click="close()" type="button" class="close"><span aria-hidden="true">&times;</span></md-button> -->
-        <!--      <div class="md-toolbar-tools">
-        <h4 class="ng-binding"  ng-show="showLogin">Login</h4>
-        <h4 class="ng-binding"  ng-show="!showLogin">Sign up</h4>
+  <md-content layout-padding>
+    <div>
+      <md-toolbar class="login-background md-primary">
+        <div class="md-toolbar-tools">
+          <h4 class="ng-binding" ng-show="showLogin">Login</h4>
+          <h4 class="ng-binding" ng-show="!showLogin">Sign up</h4>
+        </div>
+      </md-toolbar>
+      <form name="userForm"]>
+        <div layout-gt-xs="row">
+        </div>
+        <div layout-gt-sm="row" ng-show="!showLogin">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Name</label>
+            <input ng-model="user.name" ng-keypress="checkIfEnterKeyWasPressed($event)">
+          </md-input-container>
+        </div>
+        <md-input-container class="md-block">
+          <label>Email</label>
+          <input ng-model="user.email" type="email" ng-keypress="checkIfEnterKeyWasPressed($event)">
+        </md-input-container>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Password</label>
+            <input ng-model="user.password" type="password" ng-keypress="checkIfEnterKeyWasPressed($event)">
+          </md-input-container>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <md-button ng-click="toggleLogin()" type="button" class="md-primary md-raised login-background"
+                   ng-show="showLogin">Need an account?
+        </md-button>
+        <md-button ng-click="toggleLogin()" type="button" class="md-primary md-raised login-background"
+                   ng-show="!showLogin">Have an account?
+        </md-button>
+        <md-button ng-click="login()" type="submit" class="md-primary md-raised login-background" ng-show="showLogin">
+          Login
+        </md-button>
+        <md-button ng-click="signup()" type="submit" class="md-primary md-raised login-background" ng-show="!showLogin">
+          Sign up
+        </md-button>
       </div>
-    </md-toolbar> -->
-        <!--     <div class="dialog-demo-content" layout="row" layout-wrap layout-margin>
-        <div ng-show="message" class="alert alert-danger" role="alert">
-            {{message}}
+      <hr>
+      <div class="row">
+        <div class="col-sm-4 col-md-3">
+          <oauth-buttons classes="btn-block"></oauth-buttons>
         </div>
-        <div class="form-group">
-            <label for="email-input">Email address</label>
-            <md-input ng-model="user.email" type="email" class="form-control" id="email-input" placeholder="Email">
-        </div>
-        <div class="form-group">
-            <label for="password-input">Password</label>
-            <md-input ng-model="user.password" type="password" class="form-control" id="password-input" placeholder="Password">
-        </div>
-    </div> -->
-        <md-content layout-padding>
-            <div>
-                <md-toolbar class="login-background md-primary">
-                    <div class="md-toolbar-tools">
-                        <h4 class="ng-binding" ng-show="showLogin">Login</h4>
-                        <h4 class="ng-binding" ng-show="!showLogin">Sign up</h4>
-                    </div>
-                </md-toolbar>
-                <form name="userForm">
-                    <div layout-gt-xs="row">
-                    </div>
-                    <div layout-gt-sm="row" ng-show="!showLogin">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Name</label>
-                            <input ng-model="user.name">
-                        </md-input-container>
-                    </div>
-                    <md-input-container class="md-block">
-                        <label>Email</label>
-                        <input ng-model="user.email" type="email">
-                    </md-input-container>
-                    <div layout-gt-sm="row">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Password</label>
-                            <input ng-model="user.password" type="password">
-                        </md-input-container>
-                    </div>
-                </form>
-                <div class="modal-footer">
-                    <md-button ng-click="toggleLogin()" type="button" class="md-primary md-raised login-background" ng-show="showLogin">Need an account?</md-button>
-                    <md-button ng-click="toggleLogin()" type="button" class="md-primary md-raised login-background" ng-show="!showLogin">Have an account?</md-button>
-                    <md-button ng-click="login()" type="submit" class="md-primary md-raised login-background" ng-show="showLogin">Login</md-button>
-                    <md-button ng-click="signup()" type="submit" class="md-primary md-raised login-background" ng-show="!showLogin">Sign up</md-button>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-4 col-md-3">
-                        <oauth-buttons classes="btn-block"></oauth-buttons>
-                    </div>
-        </md-content>
-        </div>
-<!--         
+  </md-content>
+</div>
+<!--
         </div> -->

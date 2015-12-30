@@ -1,54 +1,47 @@
 <md-dialog aria-label="Photo Details dialog" flex="{{dialog.photoDialogFlexWidth}}" id="photo-dialog-box">
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <span flex><h2 id="photo-dialog-title">{{dialog.photo.title}}</h2></span>
-            <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
-                <i class="fa fa-times fa-2x"></i>
-            </md-button>
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <span flex><h2 id="photo-dialog-title">{{dialog.photo.title}}</h2></span>
+      <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+        <i class="fa fa-times fa-2x"></i>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content layout-align="center start">
+    <div layout="row">
+      <div id="div-photo" layout-align="center start" flex="60">
+        <img src={{dialog.photo.url_m}} width>
+        <p id="date-taken">Date Taken: {{dialog.photo.datetaken}}</p>
+
+        <div flex="80"> <!-- layout-align="center start" -->
+          <save></save>
         </div>
-    </md-toolbar>
-    <md-dialog-content layout="row" layout-align="center start">
-        <div id="div-photo" layout="column" layout-align="center start" flex="60">
-            <img src={{dialog.photo.url_m}} width>
-            <p id="date-taken">Date Taken: {{dialog.photo.datetaken}}</p>
-            <!-- COMMENTS BOX -->
-
-
-            <!-- TO REMOVE BELOW WHEN DIRECTIVE IS READY -->
-
-            <md-whiteframe class="md-whiteframe-4dp" id="comments-container" layout layout-align="center center">
-                <!-- ng-controller="CommentsController as comment"> -->
-                <span ng-hide="comment.isSavedPhoto()"><ng-md-icon icon="comment" size="56"></ng-md-icon> Save this amazing photo to add comments!</span>
-            </md-whiteframe>
-            <!-- TO REMOVE ABOVE WHEN DIRECTIVE IS READY -->
-
-
-            <!-- <comment-box>FORTHCOMING</comment-box> -->
+      </div>
+      <div id="div-info" layout-align="center start" flex="40">
+        <div id="smallmapdiv">
+          <ng-map id="photomap" styles="{{dialog.mapStyle}}" style="height:350px;" zoom="15"
+                  center="{{dialog.photo.latitude}}, {{dialog.photo.longitude}}">
+            <marker position="{{dialog.photo.latitude}}, {{dialog.photo.longitude}}"></marker>
+            <!-- change draggable for draggable directions results, then deal with updating duration, elevation, and distance -->
+            <directions draggable="false" panel="directions-panel" map-type-id='TERRAIN' travel-mode="DRIVING"
+                        origin="{{$root.origin}}"
+                        destination="{{dialog.photo.latitude}}, {{dialog.photo.longitude}}"></directions>
+          </ng-map>
         </div>
-        <div id="div-info" layout-align="center start" flex="40">
-            <div id="smallmapdiv">
-                <ng-map id="photomap" styles="{{dialog.mapStyle}}" style="height:350px;" zoom="15" center="{{dialog.photo.latitude}}, {{dialog.photo.longitude}}">
-                    <marker position="{{dialog.photo.latitude}}, {{dialog.photo.longitude}}">
-                    </marker>
-                    <!-- change draggable for draggable directions results, then deal with updating duration, elevation, and distance -->
-                    <directions draggable="false" panel="directions-panel" map-type-id='TERRAIN' travel-mode="DRIVING" origin="{{$root.origin}}" destination="{{dialog.photo.latitude}}, {{dialog.photo.longitude}}">
-                    </directions>
-                </ng-map>
-            </div>
-            <div id="pathDiv" ng-if="$root.duration"></div>
-            <div id="durationDiv" ng-if="$root.duration">
-                Duration: {{$root.duration}}
-            </div>
-            <div id="distanceDiv" ng-if="$root.distance">
-                Distance: {{$root.distance}}
-            </div>
-            <md-input-container>
-                <label>Directions From</label>
-                <input id="photo-dialog-places-textbox" places-auto-complete on-place-changed="dialog.placeChanged()" />
-            </md-input-container>
-     
-            <save></save>
-            
+        <div id="pathDiv" ng-if="$root.duration"></div>
+        <div id="durationDiv" ng-if="$root.duration">
+          Duration: {{$root.duration}}
         </div>
-    </md-dialog-content>
+        <div id="distanceDiv" ng-if="$root.distance">
+          Distance: {{$root.distance}}
+        </div>
+        <md-input-container>
+          <label>Directions From</label>
+          <input id="photo-dialog-places-textbox" places-auto-complete on-place-changed="dialog.placeChanged()"/>
+        </md-input-container>
+      </div>
+    </div>
+  </md-dialog-content>
 </md-dialog>

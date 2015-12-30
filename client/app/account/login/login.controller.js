@@ -1,10 +1,6 @@
 'use strict';
 
-
-
-
 angular.module('ScoutIOApp.login', ['ngMaterial'])
-  // .config(function($mdThemingProvider) { $mdThemingProvider.theme('docs-dark') .dark(); }) <i class="fa fa-key fa-2x" style="color:white"></i>
   .directive('login', [function() {
     return {
       restrict: 'EA',
@@ -20,7 +16,6 @@ angular.module('ScoutIOApp.login', ['ngMaterial'])
     };
   }])
   .controller('LoginDirectiveCtrl', ['$scope', '$rootScope', '$mdDialog', '$mdMedia','Auth', function($scope, $rootScope, $mdDialog, $mdMedia, Auth) {
-
     $scope.isLoggedIn = (Auth.isLoggedIn()) ? true : false;
 
     $rootScope.$on('userAction', function(){
@@ -43,11 +38,8 @@ angular.module('ScoutIOApp.login', ['ngMaterial'])
       $rootScope.$broadcast('userAction');
     };
 
-
-
   }])
   .controller('LoginInstanceCtrl', ['$scope', '$rootScope', '$window', '$mdUtil', '$mdBottomSheet', '$mdDialog', 'Auth', function($scope, $rootScope, $window, $mdUtil, $mdBottomSheet, $mdDialog, Auth) {
-
     $scope.user = {};
     $scope.showLogin = true;
 
@@ -55,9 +47,7 @@ angular.module('ScoutIOApp.login', ['ngMaterial'])
       $scope.showLogin = !($scope.showLogin);
     };
 
-
     $scope.login = function() {
-      console.log($scope.user);
       Auth.login({
         email: $scope.user.email,
         password: $scope.user.password
@@ -77,14 +67,16 @@ angular.module('ScoutIOApp.login', ['ngMaterial'])
     $scope.signup = function() {
       Auth.createUser($scope.user);
       $mdDialog.hide();
-        // .then(function(resp) {
-        //   if (resp.data) {
-        //     $scope.close();
-        //   } else {
-        //     if (resp.data.err) {
-        //       $scope.message = resp.data.err;
-        //     }
-        //   }
-        // });
+    };
+
+    $scope.checkIfEnterKeyWasPressed = function($event){
+      var keyCode = $event.which || $event.keyCode;
+      if (keyCode === 13) {
+        if (this.showLogin) {
+          this.login();
+        } else {
+          this.signup();
+        }
+      }
     };
   }]);
