@@ -45,18 +45,20 @@
         <div div layout="column">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="glyphicon glyphicon-plus"></i> Add Node</div>
+                    <i class="glyphicon glyphicon-plus"></i> Add Folder</div>
                 <div class="panel-body">
+                <br />
                     <!-- Create New Nodes -->
                     <form class="form-horizontal" novalidate name="newNodeForm" role="form">
                         <div class="form-group">
-                            <label for="addNode" flex=33 class="control-label">Node Text:</label>
+                            <label for="addNode" flex=33 class="control-label">Folder Name:</label>
                             <div flex=33 ng-class="{ 'has-error' : newNodeForm.addNode.$invalid}">
-                                <input type="text" class="form-control" id="addNode" ng-model="projects.newNode.text" name="addNode" placeholder="Node Text" required>
+                                <input type="text" class="form-control" id="addNode" ng-model="projects.newNode.text" name="addNode" placeholder="Folder Name" required>
                             </div>
                         </div>
+                        <br />
                         <div class="form-group">
-                            <label for="nodeParent" flex=33 class="control-label">Node Parent:</label>
+                            <label for="nodeParent" flex=33 class="control-label">Folder Parent:</label>
                             <div flex=33 ng-class="{ 'has-error' : newNodeForm.nodeParent.$invalid}">
                                 <select class="form-control" id="nodeParent" name="nodeParent" ng-model="projects.newNode.parent" required>
                                     <option ng-repeat="node in projects.treeData" value="{{node.id}}">{{node.text}}[{{node.id}}]</option>
