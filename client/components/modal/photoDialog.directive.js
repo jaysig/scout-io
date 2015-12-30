@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('ScoutIOApp')
-  .directive('photoDialog', ['NgMap', function (NgMap) {
+  .directive('photoDialog', ['NgMap', 'Auth', function (NgMap, Auth) {
     return {
       restrict: 'EA',
       controller: 'PhotoDialogCtrl',
       scope: {
-        photo: '='
+        photo: '=',
+        Auth: Auth
       },
       link: function (scope, element) {
         scope.showDialog(e, scope.photo);

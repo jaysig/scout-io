@@ -6,7 +6,7 @@ function ResultsController($state, $http, NgMap, Search, $rootScope) {
 
   results.search = {
     placeName: '',
-    keywords: '',
+    keywords: Search.getLastQuery(),
     setting: {
       indoor: false,
       outdoor: false
@@ -25,7 +25,6 @@ function ResultsController($state, $http, NgMap, Search, $rootScope) {
   results.$state = $state;
   $rootScope.photos = [];
 
-  results.search.keywords = Search.getLastQuery();
   results.place = null;
   results.currentDate = new Date();
   results.maxDate = new Date(

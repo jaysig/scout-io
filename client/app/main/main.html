@@ -1,18 +1,20 @@
-<div id="img2" class="imgContainer">
+<div id="img4" class="imgContainer">
   <navbar></navbar>
   <div class="splash-input" layout="column" layout-align="center center">
     <div class="searchBG">
-       <h1 id="cta" style="color:white;">Discover the Perfect Location Now</h1>
-    <form ng-submit="results.getByTagOnly(results.search.keywords)">
-      <md-input-container class="splash-search" layout="column" layout-align="center center">
-        <label class="splash-search-label">Start Searching Here</label>
-        <input type="text" ng-model="results.search.keywords" placeholder="aspen sierras" onblur="if (this.value=='') { this.placeholder='aspen sierras' }" onfocus="this.placeholder=''" id="splash-search-text" autocomplete="off">
-      </md-input-container>
-    </form>
+      <h1 id="cta" style="color:white;">Discover the Perfect Location Now</h1>
+
+      <form ng-submit="results.getByTagOnly(results.search.keywords)">
+        <md-input-container class="splash-search" layout="column" layout-align="center center">
+          <label class="splash-search-label">Start Searching Here</label>
+          <input type="text" ng-model="results.search.keywords" placeholder="aspen sierras"
+                 onblur="if (this.value=='') { this.placeholder='aspen sierras' }" onfocus="this.placeholder=''"
+                 id="splash-search-text" autocomplete="off">
+        </md-input-container>
+      </form>
     </div>
   </div>
 </div>
-
 
 <div id="purpose" class="content-area-white">
   <br><br>
@@ -20,10 +22,14 @@
   <hr class="title-hr">
   <br><br>
   <md-content class="splash-content-text">
-  We help you explore the world and discover the perfect site for your current production by geolocating crowd-sourced photos from photographers world-wide. Let <span id="scout-io">Scout.IO</span> show you what the world has to offer from your office. 
-  <br><br> 
+    We help you explore the world and discover the perfect site for your current production by geolocating crowd-sourced
+    photos from photographers world-wide. Let <span id="scout-io">Scout.IO</span> show you what the world has to offer
+    from your office.
+    <br><br>
   </md-content>
 </div>
+
+<div id="img2" class="imgContainer"></div>
 
 <div id="features" class="content-area-grey">
   <br><br>
@@ -31,7 +37,11 @@
   <hr class="title-hr">
   <br><br>
   <md-content class="splash-content-text">
-    We're with you every step of the way, from finding the ideal location to managing your project portfolios. We give you the power to quickly and easily look through hundreds of photos that meet your specific criteria. Learn more about a specific location as you scroll through each thumbnail then organize a portfolio for others to see and comment. Whether your journey for the perfect location takes you out into nature or into the city, we're here to help you find it faster.
+    We're with you every step of the way, from finding the ideal location to managing your project portfolios. We give
+    you the power to quickly and easily look through hundreds of photos that meet your specific criteria. Learn more
+    about a specific location as you scroll through each thumbnail then organize a portfolio for others to see and
+    comment. Whether your journey for the perfect location takes you out into nature or into the city, we're here to
+    help you find it faster.
     <br><br>
 
     <div flex="100" flex-xs="100" layout="row" layout-align="center center">
@@ -45,13 +55,15 @@
         <md-card-content>
           <i class="fa fa-search fa-3x first-icon"></i>
           <i class="fa fa-globe fa-3x"></i>
+
           <p class="card-text">
-          Search for hundreds of photos using keywords or refine your search by location, radius, and date range using our advanced search feature. Quickly browse through the results in the sidebar or explore the map. 
+            Search for hundreds of photos using keywords or refine your search by location, radius, and date range using
+            our advanced search feature. Quickly browse through the results in the sidebar or explore the map.
           </p>
         </md-card-content>
       </md-card>
 
-       <md-card class="splash-card">
+      <md-card class="splash-card">
         <md-card-title>
           <md-card-title-text>
             <p class="md-headline">Organize</p>
@@ -60,13 +72,15 @@
         <md-card-content>
           <i class="fa fa-folder-o fa-3x first-icon"></i>
           <i class="fa fa-users fa-3x"></i>
+
           <p class="card-text">
-          Found a photo you like? <br> Save photos in a project portfolio for future viewing. Collaborate with others by sharing your portfolio with team members and leaving each other helpful comments.
+            Found a photo you like? <br> Save photos in a project portfolio for future viewing. Collaborate with others
+            by sharing your portfolio with team members and leaving each other helpful comments.
           </p>
         </md-card-content>
       </md-card>
 
-       <md-card class="splash-card">
+      <md-card class="splash-card">
         <md-card-title>
           <md-card-title-text>
             <p class="md-headline">Learn</p>
@@ -75,8 +89,10 @@
         <md-card-content>
           <i class="fa fa-area-chart fa-3x first-icon"></i>
           <i class="fa fa-map-o fa-3x"></i>
+
           <p class="card-text">
-          Learn about a location as you browse through search results and view the map. Hover over a thumbnail to see where the photo was taken. Click on the photo to see travel duration, distance and elevation information.
+            Learn about a location as you browse through search results and view the map. Hover over a thumbnail to see
+            where the photo was taken. Click on the photo to see travel duration, distance and elevation information.
           </p>
         </md-card-content>
       </md-card>
@@ -84,6 +100,8 @@
     </div>
   </md-content>
 </div>
+
+<div id="img1" class="imgContainer"></div>
 
 <div id="team" class="content-area-white">
   <br><br>
@@ -97,10 +115,12 @@
         <div class="container">
           <div class="profile-img-container">
             <img class="profile-img" src="/assets/nissa.jpeg">
-          </div> 
+          </div>
         </div>
         <p class="profile-name">Nissa Wollum</p>
+
         <p class="profile-role">Product Owner</p>
+
         <p class="profile-role">Software Engineer</p>
         <br>
         <a href="https://github.com/nissaw"><i class="fa fa-github-square fa-1x"></i></a>
@@ -114,7 +134,9 @@
           </div>
         </div>
         <p class="profile-name">Jason Sigmon</p>
+
         <p class="profile-role">Scrum Master</p>
+
         <p class="profile-role">Software Engineer</p>
         <br>
         <a href="https://github.com/jaysig"><i class="fa fa-github-square fa-1x"></i></a>
@@ -128,7 +150,9 @@
           </div>
         </div>
         <p class="profile-name">Paul Bhorjee</p>
+
         <p class="profile-role">Development Team</p>
+
         <p class="profile-role">Software Engineer</p>
         <br>
         <a href="https://github.com/pbhorjee"><i class="fa fa-github-square fa-1x"></i></a>
@@ -142,7 +166,9 @@
           </div>
         </div>
         <p class="profile-name">Kristine Yabut</p>
+
         <p class="profile-role">Development Team</p>
+
         <p class="profile-role">Software Engineer</p>
         <br>
         <a href="https://github.com/amenotu"><i class="fa fa-github-square fa-1x"></i></a>
@@ -152,6 +178,5 @@
 
   </md-content>
 </div>
-
 
 <footer></footer>
