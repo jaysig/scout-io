@@ -31,9 +31,11 @@ module.exports = function(config) {
       'client/bower_components/angular-aria/angular-aria.js',
       'client/bower_components/angular-material/angular-material.js',
       'client/bower_components/ngmap/build/scripts/ng-map.js',
+
       'client/bower_components/angular-material-icons/angular-material-icons.min.js',
       'client/bower_components/jstree/dist/jstree.js',
       'client/bower_components/ng-js-tree/dist/ngJsTree.js',
+
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',
