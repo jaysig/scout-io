@@ -102,9 +102,6 @@ angular.module('ScoutIOApp')
     };
 
     function DialogController($scope, $mdDialog, NgMap, Auth) {
-
-      //$mdDialog.isLoggedIn = Auth.isLoggedIn();
-
       $scope.hide = function () {
         $mdDialog.hide();
       };

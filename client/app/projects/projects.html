@@ -1,57 +1,102 @@
 <navbar></navbar>
 <div class="mapContainer" layout="row" ng-controller="ProjectsController as projects">
-    <!-- SIDE NAVIGATION -->
-    <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2" id="results-sidebar-left" flex>
-        <br />
-        <br/>
-        <br/>
-        <div layout="row">
-            <div>
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h2> My Projects</h2></div>
-                    <div class="panel-body">
-                        <div id='tree' js-tree="projects.treeConfig" should-apply="projects.applyModelChanges()" ng-model="projects.treeData" tree="treeInstance" tree-events="ready:projects.readyCB;create_node:projects.createCB;select_node:projects.selectCB" ng-init="projects.getProjects()"></div>
-                    </div>
-                </div>
+  <!-- SIDE NAVIGATION -->
+  <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2" id="results-sidebar-left" flex>
+
+    <div class="search-components">
+      <md-card>
+
+        <div layout="row" class="project-card">
+          <div class="panel panel-default">
+            <span class="md-headline">My Projects</span>
+
+            <div class="panel-body">
+              <div id='tree' js-tree="projects.treeConfig" should-apply="projects.applyModelChanges()"
+                   ng-model="projects.treeData" tree="treeInstance"
+                   tree-events="ready:projects.readyCB;create_node:projects.createCB;select_node:projects.selectCB"
+                   ng-init="projects.getProjects()"></div>
             </div>
+          </div>
         </div>
-        <br/>
-        <hr>
-        <br/>
-        <md-content layout-padding>
-           
-            <h3>  Add Node </h3>
-            <form class="form-horizontal" novalidate name="newNodeForm" role="form" ng-cloak>
-                <div layout-gt-xs="row">
+
+      </md-card>
+
+      <md-card>
+
+        <div class="project-card">
+
+          <div class="md-headline">Add Folder</div>
+
+          <div class="panel panel-default">
+
+            <form name="nodeForm" class="form-horizontal" novalidate name="newNodeForm" role="form" ng-cloak>
+
+              <md-input-container md-no-float ng-class="{ 'has-error' : newNodeForm.addNode.$invalid}">
+                  <label for="addNode" class="control-label">Folder Name:</label>
+                  <input id="addNode"
+                         ng-model="projects.newNode.text"
+                         name="addNode"
+                         ng-keypress="checkIfEnterKeyWasPressed($event)"
+                         required>
+                </md-input-container>
+
+              <md-input-container md-no-float>
+                  <label>Folder Parent:</label>
+                  <md-select class="md-block"
+                             id="nodeParent"
+                             name="nodeParent"
+                             ng-model="projects.newNode.parent"
+                             required>
+                    <md-option ng-repeat="node in projects.treeData" value="{{node.id}}">{{node.text}}</md-option>
+                  </md-select>
+                </md-input-container>
+
+                <div class="pull-right">
+                  <md-button type="button"
+                             class="md-primary md-raised"
+                             ng-disabled="newNodeForm.$invalid"
+                             ng-click="projects.addNewNode()">Add
+                  </md-button>
                 </div>
-                <div layout-gt-sm="row">
-                    <md-input-container class="md-block" flex=33 ng-class="{ 'has-error' : newNodeForm.addNode.$invalid}">
-                        <label for="addNode" flex=33 class="control-label">Folder Name:</label>
-                        <input id="addNode" ng-model="projects.newNode.text" name="addNode" placeholder="Folder Name" ng-keypress="checkIfEnterKeyWasPressed($event)" required>
-                    </md-input-container>
-                </div>
-                <div layout-gt-sm="row">
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>Folder Parent:</label>
-                        <md-select class="md-block" id="nodeParent" name="nodeParent" ng-model="projects.newNode.parent" required>
-                            <md-option ng-repeat="node in projects.treeData" value="{{node.id}}">{{node.text}}[{{node.id}}]</md-option>
-                        </md-select>
-                    </md-input-container>
-                </div>
-                <div flex=33>
-                    <div class="pull-right">
-                        <md-button type="button" class="md-primary md-raised" ng-disabled="newNodeForm.$invalid" ng-click="projects.addNewNode()">Add Node</md-button>
-                    </div>
-                </div>
+
             </form>
-        </md-content>
-    </md-sidenav>
-    <div id="photos" layout="row" layout-align="center" ng-cloak>
-        <div class="thumbnail" ng-repeat="photo in projects.photos" photo="photo" flex>
-            <md-card id=photo-card-{{photo.id}} class="results-photo" ng-click="showDialog($event, photo)" flex>
-                <p class="thumbnail-description">{{photo.name}}</p>
-                <img ng-src='{{photo.url}}'>
-            </md-card>
+
+          </div>
+
         </div>
+
+      </md-card>
     </div>
+  </md-sidenav>
+
+  <md-content flex>  <!--ng-controller="PhotoDialogCtrl" -->
+    <div id="photos" layout="row" ng-cloak ng-repeat="photo in projects.photos" ng-if="$index % 3 == 0">
+
+      <div class="thumbnail" photo="photo">
+        <md-card id=photo-card-{{projects.photos[$index].id}} class="results-photo"
+                 ng-click="showDialog($event, projects.photos[$index])" flex>
+          <p class="thumbnail-description">{{projects.photos[$index].name}}</p>
+          <img ng-src='{{projects.photos[$index].url}}'>
+        </md-card>
+      </div>
+
+      <div class="thumbnail" photo="photo" ng-if="projects.photos[$index+1]">
+        <md-card id=photo-card-{{projects.photos[$index+1].id}} class="results-photo"
+                 ng-click="showDialog($event, projects.photos[$index+1])" flex>
+          <p class="thumbnail-description">{{projects.photos[$index+1].name}}</p>
+          <img ng-src='{{projects.photos[$index+1].url}}'>
+        </md-card>
+      </div>
+
+      <div class="thumbnail" photo="photo" ng-if="projects.photos[$index+2]">
+        <md-card id=photo-card-{{projects.photos[$index+2].id}} class="results-photo"
+                 ng-click="showDialog($event, projects.photos[$index+2])" flex>
+          <p class="thumbnail-description">{{projects.photos[$index+2].name}}</p>
+          <img ng-src='{{projects.photos[$index+2].url}}'>
+        </md-card>
+      </div>
+
+    </div>
+  </md-content>
+
 </div>
