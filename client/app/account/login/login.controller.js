@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ScoutIOApp.login', ['ngMaterial'])
+angular.module('ScoutIOApp.login', ['ngMaterial', 'ngMessages'])
   .directive('login', [function() {
     return {
       restrict: 'EA',
