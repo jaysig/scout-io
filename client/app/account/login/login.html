@@ -7,23 +7,56 @@
           <h4 class="ng-binding" ng-show="!showLogin">Sign up</h4>
         </div>
       </md-toolbar>
-      <form name="userForm"]>
+      <form name="userForm" ng-cloak novalidate>
         <div layout-gt-xs="row">
         </div>
         <div layout-gt-sm="row" ng-show="!showLogin">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Name</label>
-            <input ng-model="user.name" ng-keypress="checkIfEnterKeyWasPressed($event)">
+            <input type="text"
+                   name="user"
+                   ng-minlength="2"
+                   ng-model="user.name" 
+                   ng-keypress="checkIfEnterKeyWasPressed($event)" 
+                   required/>
+            <div class="login-signup" ng-messages="userForm.user.$error">
+              <div ng-cloak ng-messages="userForm.user.$error" style="color:red" role="alert" ng-show="(userForm.user.$invalid && !userForm.user.$pristine) || userForm.user.$touched">
+                <div ng-message="required">Please enter your name</div>
+                <div ng-message="minlength">Please enter a valid name</div>
+              </div>
+            </div>
           </md-input-container>
         </div>
         <md-input-container class="md-block">
           <label>Email</label>
-          <input ng-model="user.email" type="email" ng-keypress="checkIfEnterKeyWasPressed($event)">
+          <input ng-model="user.email" 
+                 type="email"
+                 name="email" 
+                 ng-keypress="checkIfEnterKeyWasPressed($event)" 
+                 required/>
+          <div class="login-signup" ng-messages="userForm.email.$error">
+            <div style="color:red" role="alert" ng-show="(userForm.email.$invalid && !userForm.email.$pristine) || userForm.email.$touched">
+              <div ng-message-exp="['required', 'email']">Please enter valid email address</div>
+            </div>
+          </div>
         </md-input-container>
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Password</label>
-            <input ng-model="user.password" type="password" ng-keypress="checkIfEnterKeyWasPressed($event)">
+            <input ng-model="user.password"
+                   password-strength="user.password" 
+                   type="password" 
+                   name="password"
+                   ng-maxlength="16"
+                   ng-keypress="checkIfEnterKeyWasPressed($event)" 
+                   required/>
+          <div ng-cloak class="login-signup" ng-messages="userForm.password.$error">
+            <div ng-cloak style="color:red" ng-show="userForm.password.$touched || (!userform.password.$valid && !userForm.password.$pristine)">
+              <div ng-cloak ng-message="required">Please enter a valid password</div>
+              <div ng-cloak class="help-block" ng-show="userForm.password.$error.maxlength">Password must be below 16 characters</div>
+              <span ng-cloak data-ng-class="strength" data-ng-show="!showLogin && userForm.password.$valid && userForm.password.$dirty">Your password is {{strength}}</span>
+            </div>
+          </div>         
           </md-input-container>
         </div>
       </form>
@@ -34,10 +67,10 @@
         <md-button ng-click="toggleLogin()" type="button" class="md-primary md-raised login-background"
                    ng-show="!showLogin">Have an account?
         </md-button>
-        <md-button ng-click="login()" type="submit" class="md-primary md-raised login-background" ng-show="showLogin">
+        <md-button ng-click="login()" type="submit" class="md-primary md-raised login-background" ng-show="showLogin" ng-disabled="userForm.$invalid">
           Login
         </md-button>
-        <md-button ng-click="signup()" type="submit" class="md-primary md-raised login-background" ng-show="!showLogin">
+        <md-button ng-click="signup()" type="submit" class="md-primary md-raised login-background" ng-show="!showLogin" ng-disabled="userForm.$invalid">
           Sign up
         </md-button>
       </div>
