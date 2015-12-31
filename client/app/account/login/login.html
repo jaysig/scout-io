@@ -7,7 +7,7 @@
           <h4 class="ng-binding" ng-show="!showLogin">Sign up</h4>
         </div>
       </md-toolbar>
-      <form name="userForm" ng-cloak novalidate>
+      <form name="userForm" ng-submit="userForm.$valid" ng-cloak novalidate>
         <div layout-gt-xs="row">
         </div>
         <div layout-gt-sm="row" ng-show="!showLogin">
@@ -17,7 +17,6 @@
                    name="user"
                    ng-minlength="2"
                    ng-model="user.name" 
-                   ng-keypress="checkIfEnterKeyWasPressed($event)" 
                    required/>
             <div class="login-signup" ng-messages="userForm.user.$error">
               <div ng-cloak ng-messages="userForm.user.$error" style="color:red" role="alert" ng-show="(userForm.user.$invalid && !userForm.user.$pristine) || userForm.user.$touched">
@@ -32,7 +31,6 @@
           <input ng-model="user.email" 
                  type="email"
                  name="email" 
-                 ng-keypress="checkIfEnterKeyWasPressed($event)" 
                  required/>
           <div class="login-signup" ng-messages="userForm.email.$error">
             <div style="color:red" role="alert" ng-show="(userForm.email.$invalid && !userForm.email.$pristine) || userForm.email.$touched">
@@ -48,7 +46,6 @@
                    type="password" 
                    name="password"
                    ng-maxlength="16"
-                   ng-keypress="checkIfEnterKeyWasPressed($event)" 
                    required/>
           <div ng-cloak class="login-signup" ng-messages="userForm.password.$error">
             <div ng-cloak style="color:red" ng-show="userForm.password.$touched || (!userform.password.$valid && !userForm.password.$pristine)">
@@ -67,7 +64,7 @@
         <md-button ng-click="toggleLogin()" type="button" class="md-primary md-raised login-background"
                    ng-show="!showLogin">Have an account?
         </md-button>
-        <md-button ng-click="login()" type="submit" class="md-primary md-raised login-background" ng-show="showLogin" ng-disabled="userForm.$invalid">
+        <md-button ng-click="login()" type="submit" class="md-primary md-raised login-background" ng-show="showLogin">
           Login
         </md-button>
         <md-button ng-click="signup()" type="submit" class="md-primary md-raised login-background" ng-show="!showLogin" ng-disabled="userForm.$invalid">
