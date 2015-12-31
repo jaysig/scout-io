@@ -28,11 +28,10 @@
 
 6. Set up your SQL server and add config variables to `local.env.js`
 
-7. Run `grunt build` + `nodemon server/index.js`
+7. Run `grunt build` + `nodemon server/index.js`  or `grunt serve` to start the development server
 
 8. Go to `http://localhost:9000` and you should see the app running!
 
-3. Run `grunt serve` to start the development server. It should automatically open the client in your browser when ready.
 
 ## Build & development
 
