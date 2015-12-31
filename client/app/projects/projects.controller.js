@@ -2,7 +2,7 @@ angular.module('ScoutIOApp')
     .controller('ProjectsController', ProjectsController);
 
 
-function ProjectsController($log, $http, $timeout, $scope, Project) {
+function ProjectsController($log, $http, $timeout, $scope, Folder, Project) {
     var vm = this;
     var newId = 1;
     vm.ignoreChanges = false;
@@ -86,6 +86,7 @@ function ProjectsController($log, $http, $timeout, $scope, Project) {
                                     orgId: folder._id,
                                     text: folder.name
                                 });
+                                vm.getPhotos({id:38});
                                 console.log(vm.treeData);
                             });
                         });
@@ -132,22 +133,30 @@ function ProjectsController($log, $http, $timeout, $scope, Project) {
     };
 
     vm.getPhotos = function(folder) {
-        $http.get('/api/links/').then(function(response) {
-            //comes back as an array of object
-            //need to use append project's name as an object's text key
-            return response.data.forEach(link => {
-                if (link.FolderId === folder)
-                    vm.photos.push({
-                        id: (newId++).toString(),
-                        parent: '#',
-                        state: {
-                            opened: true
-                        },
-                        orgId: link._id,
-                        text: link.name
-                    });
-            });
-        });
+       Folder.getFolderLinks(folder)
+       .then(function(res){
+        vm.photos=res.data;
+        console.log(vm.photos);
+        $scope.photos=res.data;
+        console.log($scope.photos);
+       });
+    
+        // $http.get('/api/links/').then(function(response) {
+        //     //comes back as an array of object
+        //     //need to use append project's name as an object's text key
+        //     return response.data.forEach(link => {
+        //         if (link.FolderId === folder)
+        //             vm.photos.push({
+        //                 id: (newId++).toString(),
+        //                 parent: '#',
+        //                 state: {
+        //                     opened: true
+        //                 },
+        //                 orgId: link._id,
+        //                 text: link.name
+        //             });
+        //     });
+        // });
     };
     this.readyCB = function() {
         $timeout(function() {
@@ -162,6 +171,7 @@ function ProjectsController($log, $http, $timeout, $scope, Project) {
     //JS Tree Click Handler 
     vm.selectCB = function(e, item) {
         console.log(item.node.original);
+        // vm.getPhotos(item);
     };
 
     this.applyModelChanges = function() {

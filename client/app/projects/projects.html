@@ -42,6 +42,8 @@
         </div>
         <br/>
         <br/>
+        <md-button ng-click="projects.getPhotos()">
+        </md-button>
         <div div layout="column">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -78,14 +80,28 @@
             </div>
         </div>
     </md-sidenav>
-   <!--  <div id="photos" layout="row" layout-align="center" ng-controller="PhotoDialogCtrl" ng-cloak>
-        <div class="thumbnail" ng-repeat="photo in $root.photos" photo="photo" flex>
-            <md-card id=photo-card-{{photo.id}} class="results-photo" ng-click="showDialog($event, photo)" ng-mouseenter="results.onMouseEnter($event, photo)" ng-mouseleave="results.onMouseLeave($event, photo)" flex>
+    <!-- <div layout="row" layout-align="center" ng-controller="PhotoDialogCtrl" ng-cloak>
+        <div class="thumbnail" ng-repeat="photo in projects.photos" photo="photo" flex>
+            
                 <p class="thumbnail-description">{{photo.title}}</p>
-                <img src={{photo.url_s}}>
-            </md-card>
+                <img ng-src='{{photo.url_m}}'>
+           
+        </div>
+        <div class="thumbnail" ng-repeat="photo in $scope.photos" photo="photo" flex>
+            
+                <p class="thumbnail-description">{{photo.title}}</p>
+                <img ng-src='{{photo.url}}'>
+           
         </div>
     </div> -->
+    <div id="photos" layout="row" layout-align="center" ng-cloak>
+        <div class="thumbnail" ng-repeat="photo in projects.photos" photo="photo" flex>
+            <md-card id=photo-card-{{photo.id}} class="results-photo" ng-click="showDialog($event, photo)"flex>
+                <p class="thumbnail-description">{{photo.name}}</p>
+                <img ng-src='{{photo.url}}'>
+            </md-card>
+        </div>
+    </div>
 </div>
 
 
