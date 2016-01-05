@@ -32,6 +32,10 @@ var all = {
     session: process.env.SESSION_SECRET || 'sql-test2-secret'
   },
 
+  // flickr: {
+  //   apiKey:       process.env.FLICKR_API_KEY,
+  // },
+
   facebook: {
     clientID:     process.env.FACEBOOK_ID || 'id',
     clientSecret: process.env.FACEBOOK_SECRET || 'secret',

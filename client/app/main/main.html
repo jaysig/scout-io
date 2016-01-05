@@ -1,74 +1,182 @@
-<div id="img0" class="imgContainer">
+<div id="img4" class="imgContainer">
   <navbar></navbar>
   <div class="splash-input" layout="column" layout-align="center center">
-    <form ng-submit="results.getByTagOnly(tagQuery)">
-      <md-input-container class="splash-search" layout="column" layout-align="center center">
-        <label style="color:#FFA000;">Start Searching Here</label>
-        <input type="text" ng-model="tagQuery" placeholder="sierras, aspen" id="splash-search-text">
-      </md-input-container>
-    <form>
+    <div class="searchBG">
+      <h1 id="cta" style="color:white;">Discover the Perfect Location Now</h1>
+
+      <form ng-submit="results.getByTagOnly(results.search.keywords)">
+        <md-input-container class="splash-search" layout="column" layout-align="center center">
+          <label class="splash-search-label">Start Searching Here</label>
+          <input type="text" ng-model="results.search.keywords" placeholder="aspen sierras"
+                 onblur="if (this.value=='') { this.placeholder='aspen sierras' }" onfocus="this.placeholder=''"
+                 id="splash-search-text" autocomplete="off">
+        </md-input-container>
+      </form>
+    </div>
   </div>
 </div>
 
-<section>
-  <span class="title">What is Scout.IO?</span>
-  <md-content>Lorem ipsum dolor sit amet, esse commodo insolens te duo, nobis dolores eum cu. Populo dolores liberavisse nec ex. Usu ne agam similique, odio nihil libris at nec, imperdiet torquatos usu an. Dolor ceteros ocurreret ad qui, ea eum solum ludus prodesset. Vis at mazim ponderum vituperatoribus. Facete liberavisse cum te. Eu aliquip virtute signiferumque vel, iusto facilis intellegebat ius at.
-
-  Dico sapientem at duo, per populo tibique voluptaria ad. Graecis philosophia mea ex. Ex pri clita noster scripta. Nostrum vulputate argumentum no pri, tollit regione vis cu. Quo te primis vivendum, duo persius prompta tincidunt cu.
-
-  Id vero adipisci est. Modus ponderum eum cu. Suavitate democritum sed ad, vis et esse quidam saperet. Quo quidam dicunt pertinax ut. Sit eu veri admodum sensibus, at vix labore feugiat appetere.
-
-  Nam ne elaboraret consectetuer. Eu sed suscipit elaboraret, ea ubique praesent duo. Ludus zril homero quo in, ea eos fierent urbanitas. Iudicabit salutatus vel ei. Integre tincidunt ad vix, et est affert ponderum facilisi. Vix primis meliore no, ut omnes iracundia rationibus est, audiam alterum eu nec.
-
-  An quis elit alienum pro. Has lucilius quaestio dissentiunt ex, pro ad tamquam antiopam vulputate. Vel eu dicta tractatos disputationi, id case habeo democritum mei, inermis lobortis partiendo his id. Est brute omnesque cu, nihil regione abhorreant id mel, nec ne utroque offendit vivendum. Nisl incorrupte delicatissimi ad vel, mei at volutpat maiestatis. Duo esse appareat id, duo melius recusabo ne.</md-content>
-</section>
-
-<div id="img1" class="imgContainer">
+<div id="purpose" class="content-area-white">
+  <br><br>
+  <span class="title">What We Do</span>
+  <hr class="title-hr">
+  <br><br>
+  <md-content class="splash-content-text">
+    We help you explore the world and discover the perfect site for your current production by geolocating crowd-sourced
+    photos from photographers world-wide. Let <span id="scout-io">Scout.IO</span> show you what the world has to offer
+    from your office.
+    <br><br>
+  </md-content>
 </div>
 
-<section>
-  <span class="title">Where will your next shoot be?</span>
-  <md-content>Lorem ipsum dolor sit amet, esse commodo insolens te duo, nobis dolores eum cu. Populo dolores liberavisse nec ex. Usu ne agam similique, odio nihil libris at nec, imperdiet torquatos usu an. Dolor ceteros ocurreret ad qui, ea eum solum ludus prodesset. Vis at mazim ponderum vituperatoribus. Facete liberavisse cum te. Eu aliquip virtute signiferumque vel, iusto facilis intellegebat ius at.
+<div id="img2" class="imgContainer"></div>
 
-  Dico sapientem at duo, per populo tibique voluptaria ad. Graecis philosophia mea ex. Ex pri clita noster scripta. Nostrum vulputate argumentum no pri, tollit regione vis cu. Quo te primis vivendum, duo persius prompta tincidunt cu.
+<div id="features" class="content-area-grey">
+  <br><br>
+  <span class="title">Features</span>
+  <hr class="title-hr">
+  <br><br>
+  <md-content class="splash-content-text">
+    We're with you every step of the way, from finding the ideal location to managing your project portfolios. We give
+    you the power to quickly and easily look through hundreds of photos that meet your specific criteria. Learn more
+    about a specific location as you scroll through each thumbnail then organize a portfolio for others to see and
+    comment. Whether your journey for the perfect location takes you out into nature or into the city, we're here to
+    help you find it faster.
+    <br><br>
 
-  Id vero adipisci est. Modus ponderum eum cu. Suavitate democritum sed ad, vis et esse quidam saperet. Quo quidam dicunt pertinax ut. Sit eu veri admodum sensibus, at vix labore feugiat appetere.
+    <div flex="100" flex-xs="100" layout="row" layout-align="center center">
 
-  Nam ne elaboraret consectetuer. Eu sed suscipit elaboraret, ea ubique praesent duo. Ludus zril homero quo in, ea eos fierent urbanitas. Iudicabit salutatus vel ei. Integre tincidunt ad vix, et est affert ponderum facilisi. Vix primis meliore no, ut omnes iracundia rationibus est, audiam alterum eu nec.
+      <md-card class="splash-card">
+        <md-card-title>
+          <md-card-title-text>
+            <p class="md-headline">Search</p>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <i class="fa fa-search fa-3x first-icon"></i>
+          <i class="fa fa-globe fa-3x"></i>
 
-  An quis elit alienum pro. Has lucilius quaestio dissentiunt ex, pro ad tamquam antiopam vulputate. Vel eu dicta tractatos disputationi, id case habeo democritum mei, inermis lobortis partiendo his id. Est brute omnesque cu, nihil regione abhorreant id mel, nec ne utroque offendit vivendum. Nisl incorrupte delicatissimi ad vel, mei at volutpat maiestatis. Duo esse appareat id, duo melius recusabo ne.</md-content>
-</section>
+          <p class="card-text">
+            Search for hundreds of photos using keywords or refine your search by location, radius, and date range using
+            our advanced search feature. Quickly browse through the results in the sidebar or explore the map.
+          </p>
+        </md-card-content>
+      </md-card>
 
-<div id="img2" class="imgContainer">
+      <md-card class="splash-card">
+        <md-card-title>
+          <md-card-title-text>
+            <p class="md-headline">Organize</p>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <i class="fa fa-folder-o fa-3x first-icon"></i>
+          <i class="fa fa-users fa-3x"></i>
+
+          <p class="card-text">
+            Found a photo you like? <br> Save photos in a project portfolio for future viewing. Collaborate with others
+            by sharing your portfolio with team members and leaving each other helpful comments.
+          </p>
+        </md-card-content>
+      </md-card>
+
+      <md-card class="splash-card">
+        <md-card-title>
+          <md-card-title-text>
+            <p class="md-headline">Learn</p>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <i class="fa fa-area-chart fa-3x first-icon"></i>
+          <i class="fa fa-map-o fa-3x"></i>
+
+          <p class="card-text">
+            Learn about a location as you browse through search results and view the map. Hover over a thumbnail to see
+            where the photo was taken. Click on the photo to see travel duration, distance and elevation information.
+          </p>
+        </md-card-content>
+      </md-card>
+
+    </div>
+  </md-content>
 </div>
 
-<section>
-  <span class="title">Customizeable Searches</span>
-  <md-content>Lorem ipsum dolor sit amet, esse commodo insolens te duo, nobis dolores eum cu. Populo dolores liberavisse nec ex. Usu ne agam similique, odio nihil libris at nec, imperdiet torquatos usu an. Dolor ceteros ocurreret ad qui, ea eum solum ludus prodesset. Vis at mazim ponderum vituperatoribus. Facete liberavisse cum te. Eu aliquip virtute signiferumque vel, iusto facilis intellegebat ius at.
+<div id="img1" class="imgContainer"></div>
 
-  Dico sapientem at duo, per populo tibique voluptaria ad. Graecis philosophia mea ex. Ex pri clita noster scripta. Nostrum vulputate argumentum no pri, tollit regione vis cu. Quo te primis vivendum, duo persius prompta tincidunt cu.
+<div id="team" class="content-area-white">
+  <br><br>
+  <span class="title">Meet the Team</span>
+  <hr class="title-hr">
+  <br><br>
+  <md-content class="splash-content-text">
+    <div flex="100" flex-xs="100" layout="row" layout-align="space-around center">
 
-  Id vero adipisci est. Modus ponderum eum cu. Suavitate democritum sed ad, vis et esse quidam saperet. Quo quidam dicunt pertinax ut. Sit eu veri admodum sensibus, at vix labore feugiat appetere.
+      <div class="profile">
+        <div class="container">
+          <div class="profile-img-container">
+            <img class="profile-img" src="/assets/nissa.jpeg">
+          </div>
+        </div>
+        <p class="profile-name">Nissa Wollum</p>
 
-  Nam ne elaboraret consectetuer. Eu sed suscipit elaboraret, ea ubique praesent duo. Ludus zril homero quo in, ea eos fierent urbanitas. Iudicabit salutatus vel ei. Integre tincidunt ad vix, et est affert ponderum facilisi. Vix primis meliore no, ut omnes iracundia rationibus est, audiam alterum eu nec.
+        <p class="profile-role">Product Owner</p>
 
-  An quis elit alienum pro. Has lucilius quaestio dissentiunt ex, pro ad tamquam antiopam vulputate. Vel eu dicta tractatos disputationi, id case habeo democritum mei, inermis lobortis partiendo his id. Est brute omnesque cu, nihil regione abhorreant id mel, nec ne utroque offendit vivendum. Nisl incorrupte delicatissimi ad vel, mei at volutpat maiestatis. Duo esse appareat id, duo melius recusabo ne.</md-content>
-</section>
+        <p class="profile-role">Software Engineer</p>
+        <br>
+        <a href="https://github.com/nissaw"><i class="fa fa-github-square fa-1x"></i></a>
+        <i class="fa fa-linkedin-square fa-1x"></i>
+      </div>
 
-<div id="img3" class="imgContainer">
+      <div class="profile">
+        <div class="container">
+          <div class="profile-img-container">
+            <img class="profile-img" src="/assets/jason.jpg">
+          </div>
+        </div>
+        <p class="profile-name">Jason Sigmon</p>
+
+        <p class="profile-role">Scrum Master</p>
+
+        <p class="profile-role">Software Engineer</p>
+        <br>
+        <a href="https://github.com/jaysig"><i class="fa fa-github-square fa-1x"></i></a>
+        <i class="fa fa-linkedin-square fa-1x"></i>
+      </div>
+
+      <div class="profile">
+        <div class="container">
+          <div class="profile-img-container">
+            <img class="profile-img" src="/assets/paul.jpg">
+          </div>
+        </div>
+        <p class="profile-name">Paul Bhorjee</p>
+
+        <p class="profile-role">Development Team</p>
+
+        <p class="profile-role">Software Engineer</p>
+        <br>
+        <a href="https://github.com/pbhorjee"><i class="fa fa-github-square fa-1x"></i></a>
+        <i class="fa fa-linkedin-square fa-1x"></i>
+      </div>
+
+      <div class="profile">
+        <div class="container">
+          <div class="profile-img-container">
+            <img class="profile-img" src="/assets/kristine.jpeg">
+          </div>
+        </div>
+        <p class="profile-name">Kristine Yabut</p>
+
+        <p class="profile-role">Development Team</p>
+
+        <p class="profile-role">Software Engineer</p>
+        <br>
+        <a href="https://github.com/amenotu"><i class="fa fa-github-square fa-1x"></i></a>
+        <i class="fa fa-linkedin-square fa-1x"></i></a>
+      </div>
+    </div>
+
+  </md-content>
 </div>
-
-<section>
-  <span class="title">Project Management & Collaboration</span>
-  <md-content>Lorem ipsum dolor sit amet, esse commodo insolens te duo, nobis dolores eum cu. Populo dolores liberavisse nec ex. Usu ne agam similique, odio nihil libris at nec, imperdiet torquatos usu an. Dolor ceteros ocurreret ad qui, ea eum solum ludus prodesset. Vis at mazim ponderum vituperatoribus. Facete liberavisse cum te. Eu aliquip virtute signiferumque vel, iusto facilis intellegebat ius at.
-
-  Dico sapientem at duo, per populo tibique voluptaria ad. Graecis philosophia mea ex. Ex pri clita noster scripta. Nostrum vulputate argumentum no pri, tollit regione vis cu. Quo te primis vivendum, duo persius prompta tincidunt cu.
-
-  Id vero adipisci est. Modus ponderum eum cu. Suavitate democritum sed ad, vis et esse quidam saperet. Quo quidam dicunt pertinax ut. Sit eu veri admodum sensibus, at vix labore feugiat appetere.
-
-  Nam ne elaboraret consectetuer. Eu sed suscipit elaboraret, ea ubique praesent duo. Ludus zril homero quo in, ea eos fierent urbanitas. Iudicabit salutatus vel ei. Integre tincidunt ad vix, et est affert ponderum facilisi. Vix primis meliore no, ut omnes iracundia rationibus est, audiam alterum eu nec.
-
-  An quis elit alienum pro. Has lucilius quaestio dissentiunt ex, pro ad tamquam antiopam vulputate. Vel eu dicta tractatos disputationi, id case habeo democritum mei, inermis lobortis partiendo his id. Est brute omnesque cu, nihil regione abhorreant id mel, nec ne utroque offendit vivendum. Nisl incorrupte delicatissimi ad vel, mei at volutpat maiestatis. Duo esse appareat id, duo melius recusabo ne.</md-content>
-</section>
 
 <footer></footer>

@@ -1,9 +1,18 @@
-<a ng-class="classes" ng-click="OauthButtons.loginOauth('facebook')" class="btn btn-facebook">
-  <i class="fa fa-facebook"></i>
+<div layout="row" layout-align="center">
+<md-button class="md-icon-button" aria-label="Facebook Login" ng-click="OauthButtons.loginOauth('facebook')" ui-sref-active="active">
+    <i class="fa fa-facebook-official fa-2x" style="color:#3B5998;"></i>
+    <h2>Facebook</h2>
+    <md-tooltip md-direction="bottom">Facebook</md-tooltip>
+</md-button>
+<md-button class="md-icon-button" aria-label="Google + Login" ng-click="OauthButtons.loginOauth('google')" ui-sref-active="active">
+    <i class="fa fa-google-plus fa-2x" style="color:#dd4b39;"></i>
+
+    <md-tooltip md-direction="bottom">Google+</md-tooltip>
+</md-button>
+<div>
+<!-- <a ng-class="classes"  class="md-button">
+  
   Facebook
-</a>
-<a ng-class="classes" ng-click="OauthButtons.loginOauth('google')" class="btn btn-google">
-  <i class="fa fa-google-plus"></i>
-  Google+
-</a>
+</a> -->
+
 

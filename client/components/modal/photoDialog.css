@@ -1,0 +1,27 @@
+#save-btn {
+	float:right;
+	margin-right:20px;
+}
+
+#photo-dialog-title {
+  font-size: 28px;
+}
+
+/*#comments-container {*/
+  /*width: 400px;*/
+  /*height: 100px;*/
+  /*margin-bottom: 10px;*/
+/*}*/
+
+#date-taken {
+  margin: 0 0 15px 15px
+}
+
+#distanceDiv {
+  margin-bottom: 20px;
+}
+
+#photo-dialog-places-textbox::-webkit-input-placeholder { color:transparent; }
+#photo-dialog-places-textbox:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
+#photo-dialog-places-textbox:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+#photo-dialog-places-textbox:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */

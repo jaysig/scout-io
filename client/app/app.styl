@@ -18,17 +18,101 @@
 // App-wide Styles
 //
 
+
+body
+  //font-variant small-caps
+  background-color transparent
+  font-family 'Lato', sans-serif
+
 .browserupgrade
   background #ccc
   color #000
   margin 0.2em 0
   padding 0.2em 0
 
+
+//Ensure the dialog is fully displayed.
+.md-dialog, .md-transition-in
+  max-height: 100%
+
 // Responsive: Portrait tablets and up
 @media screen and (min-width: 768px)
   .container
     max-width 730px
 
+// Login Button: Added color
+.loginButton
+  color #FFFFFF
+  text-decoration none
+  font-weight 700
+  font-size 18px
+
+.loginContainer
+  margin-right 30px
+  padding 3px
+
+.login-signup
+  width 270.75px
+  height 24px
+
+//Color for password strength
+
+span.ng-binding.strong 
+  color rgb(0, 139, 4)
+  font-size 12px
+  padding-right 50px
+
+span.ng-binding.medium 
+  color rgb(231, 224, 0)
+  font-size 12px
+  padding-right 50px
+
+span.ng-binding.weak 
+  color rgb(231, 0, 0)
+  font-size 12px
+  padding-right 50px
+
+.help-block 
+  font-size 12px
+
+[ng\:cloak], [ng-cloak], .ng-cloak 
+  display none !important
+
+  
+.navbar-text
+  padding 6px
+
+.md-button.md-icon-button
+  width 60px
+
+#toolbar
+  background-color rgba(0,0,0,0.6)
+
+#searchLabel
+  font-size 30px
+
+.login-background
+  text-transform uppercase
+  align-items center
+  text-align center
+
+md-toolbar:not(.md-menu-toolbar), .md-button.md-raised:not([disabled])
+  background-color rgb(36, 46, 56)
+
+#cta
+  font-family 'Lobster Two', cursive
+  font-size 47px
+  margin 0px 10px 8px 10px
+
+.nav-menu
+  color #EEEFB9
+  background-color rgb(120,144,156) 
+
+.search-text
+  line-height 55px
+
+//md-toolbar.md-default-theme:not(.md-menu-toolbar)
+//  color rgb(238, 239, 185)
 // Component styles are injected through grunt
 // injector
 @import 'admin/admin.styl';

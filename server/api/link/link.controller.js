@@ -12,6 +12,9 @@
 var _ = require('lodash');
 var sqldb = require('../../sqldb');
 var Link = sqldb.Link;
+var Folder = sqldb.Folder;
+var Comment = sqldb.Comment;
+var Project = sqldb.Project;
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -80,8 +83,42 @@ exports.show = function(req, res) {
 
 // Creates a new Link in the DB
 exports.create = function(req, res) {
-  Link.create(req.body)
-    .then(responseWithResult(res, 201))
+  var newLink;
+
+  Link.create({
+    name: req.body.name,
+    url: req.body.url,
+    apiID: Number(req.body.apiID),
+    apiName: req.body.apiName,
+    active: 1
+  })
+    .then(function(link){
+      newLink = link;
+      link.setUser(req.user);
+
+      Folder.find({
+        where: {
+          _id: req.body.folderId
+        }
+      })
+      .then(function(folder){
+        newLink.setFolder(folder)
+      })
+    })
+    .then(function(){
+      if (req.body.comment){
+        Comment.create({
+          text: req.body.comment
+        })
+        .then(function(comment){
+          comment.setLink(newLink);
+          comment.setUser(req.user);
+        })
+      }
+    })
+    .then(function(link){
+      res.status(200).json(link);
+    })
     .catch(handleError(res));
 };
 
@@ -114,7 +151,7 @@ exports.destroy = function(req, res) {
 };
 
 /**
- * Get link commnets
+ * Get link comments
  */
 
 exports.comments = function(req, res) {

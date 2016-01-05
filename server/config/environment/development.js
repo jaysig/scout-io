@@ -12,6 +12,9 @@ try {
 
 module.exports = {
 
+  flickr: {
+    apiKey:       localConfig.FLICKR_API_KEY
+  },
   facebook: {
     clientID:     localConfig.FACEBOOK_ID,
     clientSecret: localConfig.FACEBOOK_SECRET

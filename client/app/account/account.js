@@ -6,7 +6,7 @@ angular.module('ScoutIOApp')
       .state('login', {
         url: '/login',
         templateUrl: 'app/account/login/login.html',
-        controller: 'LoginController',
+        controller: 'LoginInstanceCtrl',
         controllerAs: 'vm'
       })
       .state('logout', {
@@ -38,6 +38,7 @@ angular.module('ScoutIOApp')
   .run(function($rootScope) {
     $rootScope.$on('$stateChangeStart', function(event, next, nextParams, current) {
       if (next.name === 'logout' && current && current.name && !current.authenticate) {
+        // Test
         next.referrer = current.name;
       }
     });

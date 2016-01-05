@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
         notEmpty: true
       }
     },//Unique?
-    apiID: DataTypes.INTEGER(11),
+    apiID: DataTypes.BIGINT,
     apiName: DataTypes.CHAR(45),
     publicComments: DataTypes.STRING(8000),
     active: DataTypes.BOOLEAN()

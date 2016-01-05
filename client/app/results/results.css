@@ -1,22 +1,3 @@
-/*#resultlogo {
-  font-size: 3em;
-  color: salmon;
-}
-
-#map {
-   Set a size for our map container, the Google Map will take up 100% of this container
-/*    width: 750px;
-    height: 500px;
-}
-
-#results-sidebar-left {
-  color: transparent;
-}
-*/
-/*=========================================
-            BACKGROUND MAP
-=========================================*/
-
 #map {
   height: 100%;
   width: 100%;
@@ -24,14 +5,25 @@
 
 #results-sidebar-left {
   height: calc(100vh - 64px);
-  background-color: rgba(89, 89, 89, 0.4);
+  background-color: rgb(255, 255, 255);
 }
 
 /*=========================================
             SEARCH COMPONENTS
 =========================================*/
 
-div.search-components {
+input#results-search-bar,
+input#radius {
+  margin-left: 15px;
+}
+
+#radius-label, #any-all-label {
+  margin-left: 4px;
+}
+
+md-slider {
+  margin-left: 15px;
+  margin-right: 23px;
 }
 
 #places-textbox::-webkit-input-placeholder { color:transparent; }
@@ -39,13 +31,37 @@ div.search-components {
 #places-textbox:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
 #places-textbox:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 
-/*=========================================
-            LAT/LON/RADIUS
-=========================================*/
-md-input-container #latitude.md-input,
-md-input-container #longtitude.md-input,
-md-input-container #radius.md-input {
-  width: 90px;
+md-checkbox {
+  box-sizing: border-box;
+  display: block;
+  margin: 8px;
+  margin-left: 15px;
+  margin-right: 15px;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding-left: 18px;
+  padding-right: 0;
+  position: relative;
+  line-height: 26px;
+  min-width: 18px;
+  min-height: 18px;
+}
+
+md-input-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 2px;
+  padding-bottom: 15px;
 }
 
 /*=========================================
@@ -90,10 +106,12 @@ input.md-datepicker-input {
   background: transparent;
   min-width: 80px;
   max-width: 80px;
+  margin-left: 3px;
+  margin-right: 5px;
 }
 
 div.datepicker {
-  margin-left: 20px;
+  margin-left: 15px;
   margin-bottom: 20px;
 }
 
@@ -102,18 +120,85 @@ md-datepicker {
   background-color: transparent;
 }
 
+.md-datepicker-calendar-pane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  border-width: 1px;
+  border-style: solid;
+  background: rgba(255, 255, 255, 1);
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  transition: -webkit-transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#show-advanced-button {
+  color: rgb(255,179,0);
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+/*=========================================
+            CALENDAR STYLES
+=========================================*/
+
+.md-datepicker-calendar, .md-datepicker-input-mask-opaque {
+  background: rgb(255,255,255);
+}
+
+
+.md-calendar-date.md-calendar-selected-date .md-calendar-date-selection-indicator,
+.md-calendar-date.md-focus.md-calendar-selected-date .md-calendar-date-selection-indicator {
+  background: rgb(33,150,243);
+  color: rgb(255,255,255);
+  border-color: transparent;
+}
+
+.md-calendar-date-selection-indicator:hover {
+  background: rgb(224,224,224);
+}
+
+.md-calendar-day-header{
+  background: rgb(224,224,224);
+  color: rgba(0,0,0,0.87);
+}
+
+.md-calendar-date-disabled, .md-calendar-month-label-disabled {
+  color: rgba(0,0,0,0.26);
+}
+
 /*=========================================
             	PHOTOS
 =========================================*/
 
 div.thumbnail {
   text-align: center;
+  margin: 0 10px 0 10px;
 }
 
 p.thumbnail-description {
-  text-align: left;
-  font-size: 12px;
-  margin: 20px;
+  margin: 10px;
 }
 
+md-card.results-photo {
+  cursor: pointer;
+  border-style: solid;
+  border-color: white;
+}
+
+md-card.hovered {
+  border-style: solid;
+  border-color: lightblue;
+}
+
+md-card img {
+  align-self: center;
+  width: 90%;
+  height: 90%;
+  margin-bottom: 15px;
+}
 

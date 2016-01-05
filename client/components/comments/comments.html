@@ -1,0 +1,27 @@
+<md-whiteframe class="md-whiteframe-4dp" id="comments-container" layout layout-align="center center">
+    <!-- ng-controller="CommentsController as comment"> -->
+    <span ng-hide="comment.isSavedPhoto()"><ng-md-icon icon="comment" size="56"></ng-md-icon> Save this amazing photo to add comments!</span>
+    <md-content class="photo-comments-private" ng-show="isSavedPhoto()">
+        <div ng-repeat="comment in dialog.photo.comments">
+            <p>{{comment.text}}{{comment.created_at}}{{comment.author}}</p>
+            <md-button class="md-icon-button" aria-label="Edit" ng-show="isAuthor()" ng-click="comment.edit()">
+                <!-- IF YOU CLICK ICON EDIT/DELETE FORM SHOWS IN COMMENT BOX -->
+                <ng-md-icon icon="create"></ng-md-icon>
+                <md-tooltip md-direction="bottom">Edit Comment</md-tooltip>
+            </md-button>
+        </div>
+        <!-- ADD COMMENT FORM -->
+        <form name="CommentForm">
+            <md-input-container>
+                <!--  <md-input-container  md-no-float class="md-block" -->
+                <!--   <md-icon>
+         <ng-md-icon icon="add_box"></ng-md-icon>
+        </md-icon> -->
+                <md-input type="textarea" ng-model="photo.newComment" placeholder="chase scene possibility" ng-sumbit="comment.addComment(photo.newComment)" />
+                <!--          <md-button class="md-icon-button" aria-label="Submit" ng-click="addComment(photo.newComment)">
+                    <md-tooltip md-direction="top">Submit Comment</md-tooltip>
+                  </md-button> -->
+            </md-input-container>
+        </form>
+    </md-content>
+</md-whiteframe>

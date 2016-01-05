@@ -1,0 +1,47 @@
+<md-dialog aria-label="Photo Details dialog" flex="{{dialog.photoDialogFlexWidth}}" id="photo-dialog-box">
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <span flex><h2 id="photo-dialog-title">{{dialog.photo.title}}</h2></span>
+      <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+        <i class="fa fa-times fa-2x"></i>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content layout-align="center start">
+    <div layout="row">
+      <div id="div-photo" layout-align="center start" flex="60">
+        <img src={{dialog.photo.url_m}} width>
+        <p id="date-taken">Date Taken: {{dialog.photo.datetaken}}</p>
+
+        <div flex="80" ng-if="dialog.isLoggedIn">
+          <save></save>
+        </div>
+      </div>
+      <div id="div-info" layout-align="center start" flex="40">
+        <div id="smallmapdiv">
+          <ng-map id="photomap" styles="{{dialog.mapStyle}}" style="height:350px;" zoom="15"
+                  center="{{dialog.photo.latitude}}, {{dialog.photo.longitude}}">
+            <marker position="{{dialog.photo.latitude}}, {{dialog.photo.longitude}}"></marker>
+            <!-- change draggable for draggable directions results, then deal with updating duration, elevation, and distance -->
+            <directions draggable="false" panel="directions-panel" map-type-id='TERRAIN' travel-mode="DRIVING"
+                        origin="{{$root.origin}}"
+                        destination="{{dialog.photo.latitude}}, {{dialog.photo.longitude}}"></directions>
+          </ng-map>
+        </div>
+        <div id="pathDiv" ng-if="$root.duration"></div>
+        <div id="durationDiv" ng-if="$root.duration">
+          <b>Duration:</b> {{$root.duration}}
+        </div>
+        <div id="distanceDiv" ng-if="$root.distance">
+          <b>Distance:</b> {{$root.distance}}
+        </div>
+        <md-input-container>
+          <label>Directions From</label>
+          <input id="photo-dialog-places-textbox" places-auto-complete on-place-changed="dialog.placeChanged()"/>
+        </md-input-container>
+      </div>
+    </div>
+  </md-dialog-content>
+</md-dialog>

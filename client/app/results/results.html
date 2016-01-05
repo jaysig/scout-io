@@ -5,124 +5,114 @@
   <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2" id="results-sidebar-left" flex>
 
     <div class="search-components">
-      <!-- SEARCH -->
-      <md-input-container md-no-float class="md-block">
-        <label>Search</label>
-        <input
-          id="places-textbox"
-          places-auto-complete
-          ng-model="vm.address"
-          on-place-changed="vm.placeChanged()"/>
-      </md-input-container>
+      <md-card>
 
-
-
-      <!-- ADVANCED SEARCH -->
-      <div layout="row">
-        <md-checkbox ng-model="setting.indoor">
-          Indoor
-        </md-checkbox>
-        <md-checkbox ng-model="setting.outdoor">
-          Outdoor
-        </md-checkbox>
-      </div>
-
-      <div layout="row">
-        <div class="location" flex>
-          <md-input-container md-no-float class="md-block">
-            <label>Radius</label>
-            <md-select ng-model="radius">
-              <md-option>1</md-option>
-              <md-option>2</md-option>
-              <md-option>3</md-option>
-              <md-option>5</md-option>
-              <md-option>10</md-option>
-              <md-option>15</md-option>
-              <md-option>20</md-option>
-            </md-select>
+        <form ng-cloak ng-submit="results.advancedSearch(results.search)">
+          <md-input-container md-no-float class="md-block md-accent">
+            <label>Keywords</label>
+            <input ng-model="results.search.keywords" autocomplete="off" ng-init="results.search.keywords"/>
           </md-input-container>
-        </div>
-      </div>
 
-      <!-- DATE RANGE to search for season-->
-      <div layout="row">
-        <div class="datepicker" flex>
-          <label>Start Date</label>
-          <md-datepicker class="datepickerBtn" ng-model="startDate"></md-datepicker>
-        </div>
-        <div class="datepicker" flex>
-          <label>End Date</label>
-          <md-datepicker class="datepickerBtn" ng-model="endDate"></md-datepicker>
-        </div>
-      </div>
+          <!-- ADVANCED SEARCH -->
+          <div layout="row" layout-align="center center">
+            <a id="show-advanced-button"
+               ng-click="results.toggleAdvancedSearchDiv(results.advancedSearchOpen)"
+               ng-init="results.showHide='Show Advanced Search'">{{results.showHide}}
+            </a>
+          </div>
+
+          <div id="advanced-search" ng-show="results.advancedSearchOpen">
+            <label id="any-all-label">Search for Any or All Keywords:</label>
+
+            <div layout="row" layout-align="center">
+              <h5>all
+                <md-tooltip md-direction="bottom">Photos must contain all keywords</md-tooltip>
+              </h5>
+              <md-switch ng-model="results.search.tag" aria-label="tag switch" ng-true-value="'any keywords'"
+                         ng-false-value="'all keywords'" class="md-warn">
+              </md-switch>
+              <h5>any
+                <md-tooltip md-direction="bottom">Photos must contain at least one matching keyword</md-tooltip>
+              </h5>
+            </div>
+
+            <div layout="row">
+              <md-checkbox ng-model="results.search.setting.indoor">
+                Indoor
+              </md-checkbox>
+              <md-checkbox ng-model="results.search.setting.outdoor">
+                Outdoor
+              </md-checkbox>
+            </div>
+
+            <md-input-container md-no-float class="md-block md-accent">
+              <label>Search Location</label>
+              <input id="places-textbox"
+                     places-auto-complete
+                     ng-model="results.search.placeName"
+                     on-place-changed="results.placeChanged()"/>
+            </md-input-container>
+
+            <div layout="row">
+              <div class="location" flex>
+                <label id="radius-label">Radius</label>
+                <br>
+                <md-input-container md-no-float>
+                  <md-slider flex md-discrete ng-model="results.search.radius" step="1" min="2" max="20"
+                             aria-label="radius">
+                  </md-slider>
+                </md-input-container>
+              </div>
+            </div>
+
+            <!-- DATE RANGE to search for season-->
+            <div layout="row">
+              <div class="datepicker md-accent" flex>
+                <label>Start Date</label>
+                <md-datepicker class="datepickerBtn md-accent" md-max-date="results.maxDate"
+                               ng-model="results.search.startDate"></md-datepicker>
+              </div>
+              <div class="datepicker md-accent" flex>
+                <label>End Date</label>
+                <md-datepicker class="datepickerBtn md-accent" md-min-date="results.search.startDate"
+                               md-max-date="results.maxDate" ng-model="results.search.endDate"></md-datepicker>
+              </div>
+            </div>
+          </div>
+
+          <div layout="row" layout-align="center center">
+            <md-button class="md-raised md-primary">Search</md-button>
+          </div>
+        </form>
+      </md-card>
     </div>
 
-
-
-    <!--RESULTS-->
-    <div layout="column" layout-align="center">
-      <div class="thumbnail" flex>
-        <p>Title of Photo Thumbnail</p>
-        <i class="fa fa-picture-o fa-5x"></i>
-
-        <p class="thumbnail-description">Lorem ipsum dolor sit amet, esse commodo insolens te duo, nobis dolores eum cu.
-          Populo dolores liberavisse nec ex. Usu ne agam similique, odio nihil libris at nec, imperdiet torquatos usu
-          an. Dolor ceteros ocurreret ad qui, ea eum solum ludus prodesset. Vis at mazim ponderum vituperatoribus.
-          Facete liberavisse cum te. Eu aliquip virtute signiferumque vel, iusto facilis intellegebat ius at.</p>
-      </div>
-      <div class="thumbnail" flex>
-        <p>Title of Photo Thumbnail</p>
-        <i class="fa fa-picture-o fa-5x"></i>
-
-        <p class="thumbnail-description">Lorem ipsum dolor sit amet, esse commodo insolens te duo, nobis dolores eum cu.
-          Populo dolores liberavisse nec ex. Usu ne agam similique, odio nihil libris at nec, imperdiet torquatos usu
-          an. Dolor ceteros ocurreret ad qui, ea eum solum ludus prodesset. Vis at mazim ponderum vituperatoribus.
-          Facete liberavisse cum te. Eu aliquip virtute signiferumque vel, iusto facilis intellegebat ius at.</p>
-      </div>
-      <div class="thumbnail" flex>
-        <p>Title of Photo Thumbnail</p>
-        <i class="fa fa-picture-o fa-5x"></i>
-
-        <p class="thumbnail-description">Lorem ipsum dolor sit amet, esse commodo insolens te duo, nobis dolores eum cu.
-          Populo dolores liberavisse nec ex. Usu ne agam similique, odio nihil libris at nec, imperdiet torquatos usu
-          an. Dolor ceteros ocurreret ad qui, ea eum solum ludus prodesset. Vis at mazim ponderum vituperatoribus.
-          Facete liberavisse cum te. Eu aliquip virtute signiferumque vel, iusto facilis intellegebat ius at.</p>
-      </div>
-      <div class="thumbnail" flex>
-        <p>Title of Photo Thumbnail</p>
-        <i class="fa fa-picture-o fa-5x"></i>
-
-        <p class="thumbnail-description">Lorem ipsum dolor sit amet, esse commodo insolens te duo, nobis dolores eum cu.
-          Populo dolores liberavisse nec ex. Usu ne agam similique, odio nihil libris at nec, imperdiet torquatos usu
-          an. Dolor ceteros ocurreret ad qui, ea eum solum ludus prodesset. Vis at mazim ponderum vituperatoribus.
-          Facete liberavisse cum te. Eu aliquip virtute signiferumque vel, iusto facilis intellegebat ius at.</p>
-      </div>
-      <div class="thumbnail" flex>
-        <p>Title of Photo Thumbnail</p>
-        <i class="fa fa-picture-o fa-5x"></i>
-
-        <p class="thumbnail-description">Lorem ipsum dolor sit amet, esse commodo insolens te duo, nobis dolores eum cu.
-          Populo dolores liberavisse nec ex. Usu ne agam similique, odio nihil libris at nec, imperdiet torquatos usu
-          an. Dolor ceteros ocurreret ad qui, ea eum solum ludus prodesset. Vis at mazim ponderum vituperatoribus.
-          Facete liberavisse cum te. Eu aliquip virtute signiferumque vel, iusto facilis intellegebat ius at.</p>
+    <!-- RESULTS -->
+    <div id="photos" layout="column" layout-align="center" ng-controller="PhotoDialogCtrl" ng-cloak>
+      <div class="thumbnail" ng-repeat="photo in $root.photos" photo="photo" flex>
+        <md-card id=photo-card-{{photo.id}}
+                 class="results-photo"
+                 ng-click="showDialog($event, photo)"
+                 ng-mouseenter="results.onMouseEnter($event, photo)"
+                 ng-mouseleave="results.onMouseLeave($event, photo)"
+                 flex>
+          <p class="thumbnail-description">{{photo.title}}</p>
+          <img src={{photo.url_s}}>
+        </md-card>
       </div>
     </div>
 
   </md-sidenav>
 
   <md-content flex id="map">
-
     <ng-map
+      id="resultsmap"
       style="display:block;height:calc(100vh - 64px)"
       styles="{{results.mapStyle}}"
-      scrollwheel="true"
-      zoom-to-include-markers="true">
-      <marker ng-repeat="p in results.positions"
-              position="{{p.pos}}" title="pos: {{p.pos}}">
-
-      </marker>
+      zoom="10"
+      center="current-location"
+      geo-fallback-center="37.09024, -95.71289100000001">
     </ng-map>
-
   </md-content>
 
 </div>

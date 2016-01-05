@@ -1,32 +1,43 @@
-#toolbar {
-	background-color: transparent;
+#toolbar .md-button.md-icon-button {
+  border-radius: 0px;
+  margin-bottom: -8px;
+  width: 36px;
 }
 
 .md-button {
 	color: rgba(89, 89, 89, 1);
-	background-color: rgba(89, 89, 89, 0.45);
+	background-color: rgba(40, 20, 122, 1);
 }
 
 .md-icon-button {
 	background-color: transparent;
+  margin-bottom: -10px;
 }
 
 .navbar-brand {
 	font-family: 'Limelight', cursive;
-	font-size: 52px;
+	font-size: 45px;
 	color: rgb(0, 0, 0);
-	text-shadow: 1px 0px 1px #787878;
 }
 
 .navbar-text {
-	font-size: 16px;
+	font-size: 22px;
 	margin-left: 0px;
+  width: 500px;
+  text-align: right;
+  margin-right: 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
 }
 
 .fa-camera-retro {
 	margin-left: 22px;
-	color: rgba(0, 0, 0, 0.95);
-	background-color: rgb(255, 255, 255);
+	/*color: rgb(238, 239, 185);*/
+	background-color: rgba(0,0,0,0);
 	padding: 2px;
 	border: transparent;
 }
+
+/*#toolbar .md-button:hover {*/
+  /*top: -10px*/
+/*}*/

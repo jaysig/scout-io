@@ -1,33 +1,57 @@
 <md-toolbar layout="row" layout-align="space-between center" id="toolbar">
+    <!--style="color:#EEEFB9;"-->
     <!--The left side-->
-  <i class="fa fa-camera-retro fa-2x fa-border"></i>
-  <h2 class="md-toolbar-tools">
-    <a href="/" class="navbar-brand">Scout.io</a>
-  </h2>
+    <!-- layout-align="center center" -->
+    <div layout="column" flex="10" flex-xs="33" hide-gt-sm>
+        <md-menu md-offset="2 -2">
+            <md-button class="md-icon-button" aria-label="Menu" ng-show="nav.isLoggedIn()" ng-click="$mdOpenMenu($event)">
+                <i class="fa fa-bars fa-2x"></i>
+                <md-tooltip md-direction="bottom">Menu</md-tooltip>
+            </md-button>
+            <md-menu-content width="2" class="nav-menu">
+                <md-menu-item ng-repeat="item in [1, 2, 3]">
+                    <md-button class="nav-menu"> <span md-menu-align-target>Option</span> {{item}} </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
 
-  <!--The right side-->
-  <span flex></span>
-    <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active" ui-sref="signup">Sign up</md-button>
-    <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active" ui-sref="login">Login</md-button>
-    
-    <md-button class="md-icon-button" aria-label="Profile" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="settings">
-      <i class="fa fa-user fa-2x"></i>
-    </md-button>
-
-    <span ng-show="nav.isLoggedIn()" class="navbar-text">{{ nav.getCurrentUser().name }}</span>
-
-    <md-button class="md-icon-button" aria-label="Settings" ng-show="nav.isLoggedIn() && nav.isAdmin()" ui-sref-active="active" ui-sref="settings">
-      <i class="fa fa-cog fa-2x"></i>
-    </md-button>
-
-    <!-- project icon button TODO add ui-sref -->
-    <md-button class="md-icon-button" aria-label="Projects" ng-show="nav.isLoggedIn()" ui-sref-active="active">
-      <i class="fa fa-archive fa-2x"></i>
-    </md-button>
-    <!-- end project icon button -->
-
-    <md-button class="md-icon-button" aria-label="Signout" ng-show="nav.isLoggedIn()" ui-sref="logout">
-      <i class="fa fa-sign-out fa-2x"></i>
-    </md-button>
-
+    <i class="fa fa-camera-retro fa-2x fa-border" hide show-gt-md></i>
+    <h2 class="md-toolbar-tools">
+    <a href="/" class="navbar-brand">Scout.IO</a>
+    </h2>
+    <!--The right side-->
+    <div hide show-gt-lg layout="row">
+        <span flex></span>
+    </div>
+    <!-- <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active" ui-sref="signup">Sign up</md-button>
+  <md-button ng-hide="nav.isLoggedIn()" ui-sref-active="active" ui-sref="login">Login</md-button> -->
+    <a class="loginContainer" aria-label="Login" ng-hide="nav.isLoggedIn()" ui-sref-active="active" login>
+    </a>
+    <!--  <div ng-show="nav.isLoggedIn()" layout="column" flex="20" flex-sm="10" flex-xs="5">
+        Hello! {{ nav.getCurrentUser().name }}
+    </div> -->
+    <span hide show-gt-md ng-show="nav.isLoggedIn()" class="navbar-text">{{ nav.getCurrentUser().name }}</span>
+    <div hide show-gt-sm layout="row">
+        <md-button class="md-icon-button" aria-label="Search" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="results">
+            <i class="fa fa-search fa-2x"></i>
+            <md-tooltip md-direction="bottom">Search</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Projects" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="projects">
+            <i class="fa fa-archive fa-2x"></i>
+            <md-tooltip md-direction="bottom">My Projects</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Administration" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="administration">
+            <i class="fa fa-cog fa-2x"></i>
+            <md-tooltip md-direction="bottom">Project Administration</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Profile" ng-show="nav.isLoggedIn()" ui-sref-active="active" ui-sref="settings">
+            <md-tooltip md-direction="bottom">My Settings</md-tooltip>
+            <i class="fa fa-user fa-2x"></i>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Signout" ng-show="nav.isLoggedIn()" ui-sref="logout">
+            <i class="fa fa-sign-out fa-2x"></i>
+            <md-tooltip md-direction="bottom">Logout</md-tooltip>
+        </md-button>
+    </div>
 </md-toolbar>

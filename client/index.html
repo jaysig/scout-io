@@ -9,7 +9,8 @@
 <html class="no-js"> <!--<![endif]-->
 
 <head>
-  <link href='https://fonts.googleapis.com/css?family=Limelight|Anton' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lobster+Two|Lato:400,300,700,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Limelight' rel='stylesheet' type='text/css'>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <base href="/">
@@ -17,8 +18,10 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
   <!-- build:css(client) app/vendor.css -->
-  <!-- bower:css -->
+  <!-- bower:css  ADDED-->
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <!-- endbower -->
   <!-- endbuild -->
@@ -28,15 +31,23 @@
 
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <!--Google Maps-->
-  <script src='//maps.googleapis.com/maps/api/js?libraries=places'></script>
-
+  <!--Google APIs-->
+  <script src="//maps.googleapis.com/maps/api/js?libraries=places"></script>
+  <script src="//www.gstatic.com/charts/loader.js"></script>
+  <script>google.charts.load('current', {packages: ['corechart']});</script>
+  <!-- JS Tree -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.0.9/themes/default/style.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.0.9/jstree.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
   <!-- injector:css -->
   <link rel="stylesheet" href="app/main/main.css">
+  <link rel="stylesheet" href="app/projects/projects.css">
   <link rel="stylesheet" href="app/results/results.css">
+  <link rel="stylesheet" href="components/comments/comments.css">
+  <link rel="stylesheet" href="components/modal/photoDialog.css">
   <link rel="stylesheet" href="components/navbar/navbar.css">
+  <link rel="stylesheet" href="components/save-form/save.css">
   <!-- endinjector -->
   <!-- endbuild -->
 </head>
@@ -74,11 +85,12 @@
     <![endif]-->
     <!-- build:js({client,node_modules}) app/vendor.js -->
       <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
       <script src="bower_components/angular/angular.js"></script>
       <script src="bower_components/angular-resource/angular-resource.js"></script>
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
       <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/lodash/lodash.js"></script>
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
@@ -86,42 +98,59 @@
       <script src="bower_components/angular-aria/angular-aria.js"></script>
       <script src="bower_components/angular-material/angular-material.js"></script>
       <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
+      <script src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+      <script src="bower_components/jstree/dist/jstree.js"></script>
+      <script src="bower_components/ng-js-tree/dist/ngJsTree.js"></script>
+      <script src="bower_components/angular-messages/angular-messages.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
-      <script src="components/auth/auth.module.js"></script>
       <script src="app/admin/admin.module.js"></script>
+      <script src="components/auth/auth.module.js"></script>
       <script src="components/util/util.module.js"></script>
-      <script src="app/account/signup/signup.controller.js"></script>
+      <script src="components/auth/auth.service.js"></script>
       <script src="app/admin/admin.controller.js"></script>
       <script src="app/account/account.js"></script>
       <script src="app/admin/admin.router.js"></script>
       <script src="app/app.constant.js"></script>
       <script src="app/main/main.controller.js"></script>
       <script src="app/main/main.js"></script>
-      <script src="app/project/project.controller.js"></script>
+      <script src="app/projects/projects.controller.js"></script>
+      <script src="app/projects/projects.js"></script>
       <script src="app/results/results.controller.js"></script>
       <script src="app/results/results.js"></script>
-      <script src="app/services/search.js"></script>
+      <script src="app/services/asset-factory.js"></script>
+      <script src="app/services/comment-factory.js"></script>
+      <script src="app/services/folder-factory.js"></script>
+      <script src="app/services/link-factory.js"></script>
+      <script src="app/services/project-factory.js"></script>
+      <script src="app/services/search-factory.js"></script>
+      <script src="app/account/settings/settings.controller.js"></script>
       <script src="app/account/login/login.controller.js"></script>
-      <script src="components/auth/auth.service.js"></script>
+      <script src="components/auth/auth2.service.js"></script>
       <script src="components/auth/interceptor.service.js"></script>
+      <script src="components/auth/passwordStrength.directive.js"></script>
       <script src="components/auth/router.decorator.js"></script>
       <script src="components/auth/user.service.js"></script>
+      <script src="components/comments/comments.directive.js"></script>
+      <script src="components/comments/commentsController.js"></script>
       <script src="components/footer/footer.directive.js"></script>
+      <script src="components/modal/photoDialog.directive.js"></script>
+      <script src="components/modal/photoDialogController.js"></script>
       <script src="components/mongoose-error/mongoose-error.directive.js"></script>
       <script src="components/navbar/navbar.controller.js"></script>
       <script src="components/navbar/navbar.directive.js"></script>
       <script src="components/oauth-buttons/oauth-buttons.controller.js"></script>
       <script src="components/oauth-buttons/oauth-buttons.directive.js"></script>
+      <script src="components/save-form/save.directive.js"></script>
+      <script src="components/save-form/saveController.js"></script>
       <script src="components/socket/socket.service.js"></script>
-      <script src="app/account/settings/settings.controller.js"></script>
+      <script src="app/account/signup/signup.controller.js"></script>
       <script src="components/util/util.service.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->
   </body>
-
 </html>

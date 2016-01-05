@@ -1,17 +1,8 @@
 'use strict';
 
-import {
-  User
-}
-  from '../../sqldb';
-import {
-  Project
-}
-  from '../../sqldb';
-import {
-  Folder
-}
-  from '../../sqldb';
+import {User} from '../../sqldb';
+import {Project} from '../../sqldb';
+import {Folder} from '../../sqldb';
 import Sequelize from 'sequelize';
 import passport from 'passport';
 import config from '../../config/environment';
