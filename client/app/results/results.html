@@ -88,7 +88,7 @@
     </div>
 
     <!-- RESULTS -->
-    <div id="photos" layout="column" layout-align="center" ng-controller="PhotoDialogCtrl" ng-cloak>
+    <div id="photos" layout="column" ng-controller="PhotoDialogCtrl" ng-cloak>
       <div class="thumbnail" ng-repeat="photo in $root.photos" photo="photo" flex>
         <md-card id=photo-card-{{photo.id}}
                  class="results-photo"
