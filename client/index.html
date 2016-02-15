@@ -35,6 +35,8 @@
   <!-- JS Tree -->
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.0.9/themes/default/style.min.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.0.9/jstree.min.js"></script>
+
+
   <!-- Latest compiled JavaScript -->
   <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
   <!-- injector:css -->
@@ -87,7 +89,7 @@
       <script src="bower_components/angular-resource/angular-resource.js"></script>
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
       <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-      <script src="bower_components/lodash/lodash.js"></script>
+      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
@@ -102,6 +104,10 @@
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
+    <script src="//maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <script src="//www.gstatic.com/charts/loader.js"></script>
+    <script>google.charts.load('current', {packages: ['corechart']});</script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.0.9/jstree.min.js"></script>
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
